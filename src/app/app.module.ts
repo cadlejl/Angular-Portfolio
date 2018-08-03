@@ -4,10 +4,14 @@ import { NgModule } from '@angular/core';
 import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AppShowcaseComponent } from './app-showcase/app-showcase.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    AppShowcaseComponent
   ],
   imports: [
     BrowserModule,
