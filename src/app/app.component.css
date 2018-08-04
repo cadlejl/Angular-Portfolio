@@ -2,3 +2,28 @@
 	background-color: #2572C8;
 	height: 900px;
 }
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 150px;
+	height: 40px;
+	padding: 0 24px;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 40px;
+	background-color: #fff;
+	border-radius: 48px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	box-sizing: border-box;
+	cursor: pointer;
+	color: #1976d2;
+	font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	letter-spacing: .3px;
+	text-transform: uppercase;
+}
+.btn:hover {
+	background-color: rgba(255, 255, 255, 0.863);
+	color: rgb(129, 128, 128);
+}
