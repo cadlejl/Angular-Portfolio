@@ -1,8 +1,4 @@
-.app {
-	background-color: #2572C8;
-	height: 900px;
-}
-/* .btn {
+.btn { /*should be reviewed for relevance*/
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -21,8 +17,9 @@
 	font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 	letter-spacing: .3px;
 	text-transform: uppercase;
+	margin: auto;
 }
 .btn:hover {
 	background-color: rgba(255, 255, 255, 0.863);
 	color: rgb(129, 128, 128);
-} */
+}

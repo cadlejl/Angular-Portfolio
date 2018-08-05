@@ -8,6 +8,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppShowcaseComponent } from './app-showcase/app-showcase.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { AppFormComponent } from './app-form/app-form.component';
+import { ModalComponent } from './modal/modal.component';
+import { AppSectionComponent } from './app-section/app-section.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { AppFormComponent } from './app-form/app-form.component';
     NavbarComponent,
     AppShowcaseComponent,
     AppDetailsComponent,
-    AppFormComponent
+    AppFormComponent,
+    ModalComponent,
+    AppSectionComponent
   ],
   imports: [
     BrowserModule,
