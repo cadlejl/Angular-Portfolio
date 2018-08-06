@@ -153,15 +153,19 @@
 
             <div class="form-group">
               <label 
-                for="desc-area" 
+                for="description" 
                 class="sr-only">
                 Description
               </label><!-- Note: "decs-area" = Description Text Area-->
               <textarea 
-                id="desc-area"
+                id="description"
                 rows="6"
                 class="form-control"
-                placeholder="App Description"></textarea><!--formControlName="description"-->
+                
+                placeholder="App Description"></textarea><!--formControlName="description"   [(ngModel)]="model.description"
+                  name="description"
+                  #description="ngModel" 
+                formControlName="description"-->
             </div>
 
 

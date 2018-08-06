@@ -1,11 +1,12 @@
 export class App {
 
     constructor(
-      public id: number,
+			public $key: number,
+			public position,
       public title: string,
 			public appUrl: string,
 			public description: string,
-      public imgUrl?: number,
+      public imgUrl?: string,
       public gitHubUrl?: string
     ) {  }
   }

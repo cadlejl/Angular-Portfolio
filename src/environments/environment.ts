@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Initialize Firebase: referencing sticky-notes-fb app for guidance on this.
+  firebase: {
+    apiKey: "AIzaSyB6Yp8RxX3lwcflB828erXyQEPBN-jngvY",
+    authDomain: "angular-portfolio-52830.firebaseapp.com",
+    databaseURL: "https://angular-portfolio-52830.firebaseio.com",
+    projectId: "angular-portfolio-52830",
+    storageBucket: "angular-portfolio-52830.appspot.com",
+    messagingSenderId: "525587659415"
+  }
 };
 
 /*
