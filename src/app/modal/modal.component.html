@@ -77,6 +77,13 @@
 
             <div id="positionLabel" class="col-4">
               <div class="form-group">
+
+
+
+
+
+
+
                 <label for="position" class="placement mr-2">Display Position</label>
                 <select 
                   class="form-control placement" 
@@ -122,9 +129,31 @@
 
             <div class="row">
 
-              <div class="col-6"></div>
+              <div id="positionLabel" class="col-4">
+                <div class="form-group">
+                  <label for="position" class="placement mr-2">Display Position</label>
+                  <select 
+                    class="form-control placement" 
+                    id="position"
+                    [(ngModel)]="model.position" 
+                    name="position"
+                    #power="ngModel"
+                    ><!--required   [(ngModel)]="model.position"   NOTE: Change these IDs-->
+                    <option 
+                      *ngFor="let position of positions" 
+                      [value]="position">
+                      {{ position }}
+                    </option>
+                  </select>
+                  <!-- <div 
+                    [hidden]="position.valid || position.pristine" 
+                    class="alert alert-danger">
+                    Power is required
+                  </div> -->
+                </div>
+              </div>
 
-              <div class="col-6">
+              <div class="col-6 offset-2">
                 <div class="form-group">
                   <label for="gitHubUrl" class="sr-only">GitHub URL</label>
                   <input 
