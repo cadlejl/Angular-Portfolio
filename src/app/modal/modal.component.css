@@ -1,5 +1,33 @@
+.modal-content {
+	border-radius: 10px;
+	/* background-color: #f6f8fa; */
+}
+.modal-body {
+    padding: 2.5rem 2.5rem;
+}
+input, textarea, select {
+	border: 1px solid rgba(67, 148, 241, 0.596);/*dde2e7*/
+	background-color: #F7F7F7 !important;
+}
+.placement {
+	display: inline;
+}
+select.placement {
+	width: 30%;
+}
+div#positionLabel.col-4 {
+	text-align: left;
+	font-family: inherit;
+	font-size: inherit;
+	color: #6C757D;
+}
+textarea {
+    /* background-color: #F7F7F7 !important; */
+    resize: none;
+}
+
 .btn { /*should be reviewed for relevance*/
-	display: flex;
+	/* display: flex; */
 	align-items: center;
 	justify-content: center;
 	width: 150px;
@@ -22,4 +50,42 @@
 .btn:hover {
 	background-color: rgba(255, 255, 255, 0.863);
 	color: rgb(129, 128, 128);
+}
+
+
+
+
+.buttons {
+    position: relative;
+    border: none;
+	/* padding-bottom: 4rem; */
+	/* padding: 2rem 0; */
+	padding-top: 1.5rem;
+    justify-content: center;
+}
+
+.buttons .btn {
+	margin: 10px;
+	background-color: rgb(67, 148, 241);
+	color: white;
+}
+.buttons .btn:hover {
+	background-color: #fff;
+	color: rgb(129, 128, 128);
+}
+
+
+
+
+.delete {
+    position: absolute;
+    right: 6rem;
+    bottom: .1rem;
+    color: #ccc;
+	cursor: pointer;
+	font-family: inherit;
+}
+.delete:hover {
+	color: #C62828;
+	font-weight: 600;
 }

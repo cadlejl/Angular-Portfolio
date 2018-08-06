@@ -4,6 +4,15 @@
   (click)="staticModal.show()">
   Add App
 </button>
+
+
+<!-- <div class="container">
+  <form #appForm="ngForm">
+  
+  </form>    
+</div> -->
+
+
  
 <div 
   class="modal fade" 
@@ -15,28 +24,186 @@
   aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 id="dialog-static-name" class="modal-title pull-left">Static modal</h4>
-        <button 
-          type="button" 
-          class="close pull-right" 
-          aria-label="Close" 
-          (click)="staticModal.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-form></app-form>
-        <button 
-          type="button" 
-          class="btn btn-primary" 
-          (click)="childModal.show()">
-          Open second modal
-        </button>
+      <form #appForm="ngForm">
+        <div class="modal-body">
+        <!-- <div class="modal-header"> -->
+
+          <div class="row">
+
+            <div class="col-6">
+              <div class="form-group">
+                <label for="title" class="sr-only">Title</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="title"
+                  required
+                  [(ngModel)]="model.title" 
+                  name="title"
+                  #name="ngModel"
+                  placeholder="App Title">
+                <!-- <div 
+                  [hidden]="title.valid || title.pristine"
+                  class="alert alert-danger">
+                  Title is required
+                </div> -->
+              </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                  <label for="appUrl" class="sr-only">App URL</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="appUrl"
+                    required
+                    [(ngModel)]="model.appUrl" 
+                    name="appUrl"
+                    #name="ngModel"
+                    placeholder="App URL">
+                  <!-- <div 
+                    [hidden]="appUrl.valid || appUrl.pristine"
+                    class="alert alert-danger">
+                    App URL is required
+                  </div> -->
+                </div>
+              </div>
+
+          </div>
+
+
+          <div class="row">
+
+            <div id="positionLabel" class="col-4">
+              <div class="form-group">
+                <label for="position" class="placement mr-2">Display Position</label>
+                <select 
+                  class="form-control placement" 
+                  id="position"
+                  [(ngModel)]="model.position" 
+                  name="position"
+                  #power="ngModel"
+                  ><!--required   [(ngModel)]="model.position"   NOTE: Change these IDs-->
+                  <option 
+                    *ngFor="let position of positions" 
+                    [value]="position">
+                    {{ position }}
+                  </option>
+                </select>
+                <!-- <div 
+                  [hidden]="position.valid || position.pristine" 
+                  class="alert alert-danger">
+                  Power is required
+                </div> -->
+              </div>
+            </div>
+  
+            <div class="col-6 offset-2">
+                <div class="form-group">
+                  <label for="imgUrl" class="sr-only">Image URL</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="imgUrl"
+                    [(ngModel)]="model.imgUrl" 
+                    name="imgUrl"
+                    #name="ngModel"
+                    placeholder="Image URL"><!--required-->
+                  <!-- <div 
+                    [hidden]="imgUrl.valid || imgUrl.pristine"
+                    class="alert alert-danger">
+                    ImageUrl is required
+                  </div> -->
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-6"></div>
+
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="gitHubUrl" class="sr-only">GitHub URL</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="gitHubUrl"
+                    [(ngModel)]="model.gitHubUrl" 
+                    name="gitHubUrl"
+                    #name="ngModel"
+                    placeholder="GitHub URL"><!--required-->
+                  <!-- <div 
+                    [hidden]="imgUrl.valid || imgUrl.pristine"
+                    class="alert alert-danger">
+                    ImageUrl is required
+                  </div> -->
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+              <label 
+                for="desc-area" 
+                class="sr-only">
+                Description
+              </label><!-- Note: "decs-area" = Description Text Area-->
+              <textarea 
+                id="desc-area"
+                rows="6"
+                class="form-control"
+                placeholder="App Description"></textarea><!--formControlName="description"-->
+            </div>
+
+
+
+            <div class="buttons">
+              <!-- <button 
+                type="button" 
+                class="close pull-right" 
+                aria-label="Close" 
+                (click)="staticModal.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button> -->
+              <!-- </div> header-->
+              <!-- <div class="modal-body"> -->
+              <button 
+                type="button" 
+                class="btn btn-primary"
+                (click)="staticModal.hide()">
+                Cancel
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-primary"
+                (click)="staticModal.hide()">
+                Save
+              </button>
+              <p 
+                class="delete" 
+                (click)="staticModal.hide()"><!--*ngIf="canDelete"   
+                  (click)="submitForm(true)"  data-dismiss="modal"-->
+                Delete
+              </p>
+            </div>
+          </div>
+
+
+        </form>
+
+
       </div>
     </div>
   </div>
-</div>
 
 <div 
   class="modal fade" 
