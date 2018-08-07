@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 
 
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+	background-color: rgb(67, 148, 241);
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: rgb(67, 148, 241);
+}

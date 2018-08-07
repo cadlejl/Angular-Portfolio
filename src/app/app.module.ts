@@ -5,6 +5,8 @@ import { ModalModule } from "ngx-bootstrap/modal";
 
 import { FormsModule } from "@angular/forms";
 
+import { MatRadioModule } from '@angular/material/radio';
+
 // Referencing sticky-notes-fb as guide
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from "angularfire2/database";
@@ -30,6 +32,7 @@ import { AppSectionComponent } from './app-section/app-section.component';
   imports: [
     BrowserModule,
     FormsModule,
+    MatRadioModule,
     ModalModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase /*,'my-app-name'*/)

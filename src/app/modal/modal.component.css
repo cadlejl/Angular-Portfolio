@@ -1,6 +1,6 @@
-.modal-dialog.modal-lg {
+/* .modal-dialog.modal-lg {
     max-width: 900px;
-}
+} */
 .modal-content {
 	border-radius: 10px;
 	/* background-color: #f6f8fa; */
@@ -9,7 +9,7 @@
     padding: 2.5rem 2.5rem;
 }
 input, textarea, select {
-	border: 1px solid rgba(67, 148, 241, 0.596);/*dde2e7*/
+	border: 1px solid rgba(67, 148, 241, 0.596);
 	background-color: #F7F7F7 !important;
 }
 .placement {
@@ -18,7 +18,8 @@ input, textarea, select {
 select.placement {
 	width: 30%;
 }
-div#positionLabel.col-4 {
+div#positionLabel, 
+div#sectionRadio {
 	text-align: left;
 	font-family: inherit;
 	font-size: inherit;
@@ -55,9 +56,6 @@ textarea {
 	color: rgb(129, 128, 128);
 }
 
-
-
-
 .buttons {
     position: relative;
     border: none;
@@ -76,9 +74,6 @@ textarea {
 	background-color: #fff;
 	color: rgb(129, 128, 128);
 }
-
-
-
 
 .delete {
     position: absolute;

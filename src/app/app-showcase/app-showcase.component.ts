@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { App } from "../model/app";
+import { Section } from "../model/section";
 
 import { AppService } from "../service/app.service";
 
@@ -12,7 +13,8 @@ import { AppService } from "../service/app.service";
 })
 export class AppShowcaseComponent implements OnInit {
 
-  private apps: App[] = [];
+  private apps: App[];
+  private sections: Section[];
   private currentApp = new App(null, null, null, null, null, null, null);
   private keys;
   //public appAdded = false;
@@ -20,6 +22,18 @@ export class AppShowcaseComponent implements OnInit {
   constructor(public appService: AppService) {}
 
   ngOnInit() {
+    this.getApps();
+  }
+
+  // getSections() {
+  //   let sec;
+  //   this.apps.forEach(app => {
+  //     app.position
+  //     sec = app.position
+  //   });
+  // }
+  
+  getApps() {
     this.appService.getApps().subscribe(serviceApps => {
       this.apps = serviceApps;
       this.appService.getKeys().subscribe(serviceKeys => {
@@ -27,7 +41,7 @@ export class AppShowcaseComponent implements OnInit {
         for (let i = 0; i < this.apps.length; i++) {
           this.apps[i].key = this.keys[i].key;
         }
-        // console.log(this.apps);
+        //console.log(this.apps);
       })
     })
   }
