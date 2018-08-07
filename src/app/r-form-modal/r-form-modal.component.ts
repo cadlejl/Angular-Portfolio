@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { App } from "../model/app";
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  selector: 'r-form-modal',
+  templateUrl: './r-form-modal.component.html',
+  styleUrls: ['./r-form-modal.component.css']
 })
-export class ModalComponent { 
+export class RFormModalComponent { 
   positions: number[] = [1,2,3,4,5,6,7];
   // description;
 
