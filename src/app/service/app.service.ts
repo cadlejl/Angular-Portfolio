@@ -28,6 +28,16 @@ export class AppService {
 
 	getKeys() {
 		return this.keys;
-	}
-
+  }
+  
+  addApp(app: App) {
+    this.afdb.list('apps').push({
+      position: app.position,
+      title: app.title,
+      appUrl: app.appUrl,
+      description: app.description,
+      imgUrl: app.imgUrl,
+      gitHubUrl: app.gitHubUrl
+    });
+  }
 }

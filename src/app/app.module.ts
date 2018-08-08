@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ModalModule } from "ngx-bootstrap/modal";
+import { ModalModule, ButtonsModule } from "ngx-bootstrap";
 
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms"; // Uncomment for TDForms
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { MatRadioModule } from '@angular/material/radio';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // Referencing sticky-notes-fb as guide
 import { AngularFireModule } from 'angularfire2';
@@ -17,7 +19,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppShowcaseComponent } from './app-showcase/app-showcase.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
-import { TDFormModalComponent } from './td-form-modal/td-form-modal.component';
+//import { TDFormModalComponent } from './td-form-modal/td-form-modal.component';
 import { RFormModalComponent } from "./r-form-modal/r-form-modal.component";
 import { AppSectionComponent } from './app-section/app-section.component';
 
@@ -27,15 +29,18 @@ import { AppSectionComponent } from './app-section/app-section.component';
     NavbarComponent,
     AppShowcaseComponent,
     AppDetailsComponent,
-    TDFormModalComponent,
+    //TDFormModalComponent,
     RFormModalComponent,
     AppSectionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     MatRadioModule,
     ModalModule.forRoot(),
+    ButtonsModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase /*,'my-app-name'*/)
   ],

@@ -9,3 +9,10 @@
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
     border-color: rgb(67, 148, 241);
 }
+mat-radio-button:not(.mat-radio-checked) .mat-radio-outer-circle {
+  border: 2px solid;
+  border-color: #B0BEC5;/* rgba(67, 148, 241, 0.596); */
+}
+.mat-radio-button {
+  font-family: inherit;
+}

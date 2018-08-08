@@ -1,0 +1,82 @@
+<button 
+  type="button" 
+  class="btn btn-primary" 
+  (click)="staticModal.show()">
+  Add App
+</button>
+
+<div 
+  class="modal fade" 
+  bsModal  
+  #staticModal="bs-modal" 
+  [config]="{backdrop: 'static'}"
+  tabindex="-1" 
+  role="dialog" 
+  aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+
+
+
+<form [formGroup]="appForm">
+
+<div class="row">
+
+  <div id="sectionRadio" class="col-6">
+    <div class="form-group">
+      <label for="newSection" class="newSection mr-3">New Section?</label>
+
+      <div class="btn-group">
+        <label class="btn btn-primary" [(ngModel)]="radioModel"
+               btnRadio="Left" tabindex="0" role="button">Left</label>
+        <label class="btn btn-primary" [(ngModel)]="radioModel"
+               btnRadio="Middle" tabindex="0" role="button">Middle</label>
+        <label class="btn btn-primary" [(ngModel)]="radioModel"
+               btnRadio="Right" tabindex="0" role="button">Right</label>
+      </div>
+
+
+
+
+      <!--mat-radio-group --><!--[(ngModel)]="newSection"--> 
+        <!--[(ngModel)]="yourCrust"  class="radio_Group"
+          (change)="sizeCrustChange($event)"-->
+        <!-- <mat-radio-button 
+          class="px-3"  
+          value="1" 
+          labelPosition="before">Yes</mat-radio-button>
+        <mat-radio-button 
+          class="px-3" 
+          value="2" 
+          labelPosition="before">No</mat-radio-button>
+      </mat-radio-group> -->
+
+
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="form-group">
+      <label for="imgUrl" class="sr-only">Image URL</label>
+      <!--input 
+        type="text" 
+        class="form-control" 
+        formControlName="imgUrl"
+        placeholder="Image URL"--><!--required-->
+      <!-- <div 
+        [hidden]="imgUrl.valid || imgUrl.pristine"
+        class="alert alert-danger">
+        ImageUrl is required
+      </div> -->
+    </div>
+  </div>
+
+</div>
+
+
+</form>
+
+</div>
+</div>
+</div>

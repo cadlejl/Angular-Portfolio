@@ -1,6 +1,6 @@
 export class App {
     constructor(
-			public key?: number,
+			public id?: number,
 			public position?: number,
       public title?: string,
 			public appUrl?: string,

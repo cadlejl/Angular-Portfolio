@@ -24,7 +24,7 @@
   aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <form #appForm="ngForm">
+      <form [formGroup]="appForm"><!-- (td) #appForm="ngForm" -->
         <div class="modal-body">
         <!-- <div class="modal-header"> -->
 
@@ -35,13 +35,11 @@
                 <label for="title" class="sr-only">Title</label>
                 <input 
                   type="text" 
-                  class="form-control" 
-                  id="title"
+                  class="form-control"
                   required
-                  [(ngModel)]="currentApp.title" 
-                  name="title"
-                  #name="ngModel"
-                  placeholder="App Title">
+                  formControlName="title"
+                  placeholder="App Title"><!--(td) id="title" [(ngModel)]="currentApp.title" name="title"
+                    #name="ngModel"-->
                 <!-- <div 
                   [hidden]="title.valid || title.pristine"
                   class="alert alert-danger">
@@ -56,11 +54,8 @@
                   <input 
                     type="text" 
                     class="form-control" 
-                    id="appUrl"
                     required
-                    [(ngModel)]="currentApp.appUrl" 
-                    name="appUrl"
-                    #name="ngModel"
+                    formControlName="appUrl"
                     placeholder="App URL">
                   <!-- <div 
                     [hidden]="appUrl.valid || appUrl.pristine"
@@ -78,13 +73,33 @@
             <div id="sectionRadio" class="col-6">
               <div class="form-group">
                 <label for="newSection" class="newSection mr-3">New Section?</label>
-                <mat-radio-group> 
+                
+                
+                <!-- <div class="btn-group" btnRadioGroup formControlName="radio">
+                  <label btnRadio="A" class="btn btn-primary"
+                         tabindex="0" role="button">A</label>
+                  <label btnRadio="B" class="btn btn-primary"
+                         tabindex="0" role="button">B</label>
+                  <label btnRadio="C" class="btn btn-primary"
+                         tabindex="0" role="button">C</label>
+                </div> -->
+                
+                
+                <mat-radio-group 
+                  required
+                  [(ngModel)]="newSection" 
+                  (change)="newSectionChange(newSection)"
+                  [ngModelOptions]="{standalone: true}"><!--[(ngModel)]="newSection"--> 
                   <!--[(ngModel)]="yourCrust"  class="radio_Group"
                     (change)="sizeCrustChange($event)"-->
-                  <mat-radio-button class="px-3" [value]="true">Yes<!--[value]="crust"-->
-                  </mat-radio-button>
-                  <mat-radio-button class="px-3" [value]="false">No<!--[value]="crust"-->
-                  </mat-radio-button>
+                  <mat-radio-button 
+                    class="px-3"  
+                    [value]="true" 
+                    labelPosition="before">Yes</mat-radio-button><!--[value]="crust"-->
+                  <mat-radio-button 
+                    class="px-3" 
+                    [value]="false" 
+                    labelPosition="before">No</mat-radio-button>
                 </mat-radio-group>
 
 
@@ -97,10 +112,7 @@
                   <input 
                     type="text" 
                     class="form-control" 
-                    id="imgUrl"
-                    [(ngModel)]="currentApp.imgUrl" 
-                    name="imgUrl"
-                    #name="ngModel"
+                    formControlName="imgUrl"
                     placeholder="Image URL"><!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"
@@ -120,10 +132,10 @@
                   <select 
                     class="form-control placement" 
                     id="position"
-                    [(ngModel)]="currentApp.position" 
-                    name="position"
-                    #power="ngModel"
-                    ><!--required   [(ngModel)]="model.position"   NOTE: Change these IDs-->
+                    formControlName="position"
+                    
+                    
+                    ><!--required   #power="ngModel" [(ngModel)]="currentApp.position" [(ngModel)]="model.position"   NOTE: Change these IDs-->
                     <option 
                       *ngFor="let position of positions" 
                       [value]="position">
@@ -144,10 +156,6 @@
                   <input 
                     type="text" 
                     class="form-control" 
-                    id="gitHubUrl"
-                    [(ngModel)]="currentApp.gitHubUrl" 
-                    name="gitHubUrl"
-                    #name="ngModel"
                     placeholder="GitHub URL"><!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"
@@ -174,8 +182,9 @@
               <textarea 
                 id="description"
                 rows="6"
+                required
                 class="form-control"
-                
+                formControlName="description"
                 placeholder="App Description"></textarea><!--formControlName="description"   [(ngModel)]="app.description"
                   name="description"
                   #description="ngModel" 
@@ -203,7 +212,8 @@
               <button 
                 type="button" 
                 class="btn btn-primary"
-                (click)="staticModal.hide()">
+                (click)="staticModal.hide()"
+                (click)="submitForm()">
                 Save
               </button>
               <p 
