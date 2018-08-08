@@ -36,11 +36,33 @@ export class RFormModalComponent {
 
   getApps() {
     this.appService.getApps().subscribe(apps => {
-        for (let i = 0; i <= apps.length; ) {
-          this.positions.push(++i);
-        }
+      this.auditPositions(apps);
+      //console.log(apps);
     })
+
+    // for (let i = 0; i <= apps.length; ) {
+    //   if (apps[i].position) {}
+    //   this.positions.push(++i);
+    // }
   }
+
+  auditPositions(apps) {
+    let pos = this.positions;
+    apps.forEach(app => {
+      let p = app.position
+      if (!pos.includes(p)) {
+        for (let i = 0; i < apps.length; i++) {
+          if (pos[i] < p && p < pos[i+1]) {
+            pos.push(p);
+            pos.sort();
+          }
+        }
+      }
+    });
+  }
+
+
+
 
   // Modeled after bugged-out-rebuild.bug-detail.component
   configureForm(app?: App) {
@@ -58,7 +80,7 @@ export class RFormModalComponent {
     }
 
     this.appForm = this.formB.group({
-      position: [ this.currentApp.position/*,Validators.required*/ ],
+      position: [ this.currentApp.position,Validators.required ],
       title: [ this.currentApp.title,Validators.required ],
       appUrl: [this.currentApp.appUrl, Validators.required],
       description: [this.currentApp.description, Validators.required],
@@ -71,6 +93,7 @@ export class RFormModalComponent {
 
   submitForm(/*deleteClick?: boolean*/) {
     this.currentApp.position = this.appForm.value["position"];
+    //console.log(this.currentApp.position);
     this.currentApp.title = this.appForm.value["title"];
     this.currentApp.appUrl = this.appForm.value["appUrl"];
     this.currentApp.description = this.appForm.value["description"];
@@ -103,7 +126,28 @@ export class RFormModalComponent {
 
   addApp() {
     this.appService.addApp(this.currentApp);
-		//this.freshForm();
+		this.freshForm();
+  }
+
+  freshForm() {
+    this.appForm.reset(/*{ 
+			status: this.statuses.Logged, 
+			severity: this.severities.Severe 
+    }*/);
+    
+    this.cleanApp();
+  }
+
+  cleanApp() {
+    this.currentApp = new App(
+      null, 
+      null, 
+      null, 
+      null, 
+      null, 
+      null, 
+      null
+    );
   }
 
   newSectionChange(newSection) {

@@ -21,25 +21,25 @@ export class TDFormModalComponent {
   //   this.description = this.model.description;
   // }
 
-  ngOnInit() {
-    this.configureForm();
-  }
+  // ngOnInit() {
+  //   this.configureForm();
+  // }
 
   // Modeled after bugged-out-rebuild.bug-detail.component
-  configureForm(app?: App) {
-    if (app) {
-      //this.canDelete = true;
-      this.currentApp = new App(
-        app.key,
-        app.position,
-        app.title,
-        app.appUrl,
-        app.description,
-        app.imgUrl,
-        app.gitHubUrl
-      );
-    }
-  }
+  // configureForm(app?: App) {
+  //   if (app) {
+  //     //this.canDelete = true;
+  //     this.currentApp = new App(
+  //       app.id,
+  //       app.position,
+  //       app.title,
+  //       app.appUrl,
+  //       app.description,
+  //       app.imgUrl,
+  //       app.gitHubUrl
+  //     );
+  //   }
+  // }
 
   // submitForm(/*deleteClick?: boolean*/) {
   //   this.currentApp.title = this.appForm.value["title"];

@@ -24,7 +24,9 @@
   aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <form [formGroup]="appForm"><!-- (td) #appForm="ngForm" -->
+      <form 
+        [formGroup]="appForm"
+        (ngSubmit)="submitForm()"><!-- (td) #appForm="ngForm" -->
         <div class="modal-body">
         <!-- <div class="modal-header"> -->
 
@@ -210,10 +212,11 @@
                 Cancel
               </button>
               <button 
-                type="button" 
+                type="submit" 
                 class="btn btn-primary"
                 (click)="staticModal.hide()"
-                (click)="submitForm()">
+                value="Submit"
+                [disabled]="appForm.invalid"><!--(click)="submitForm()"-->
                 Save
               </button>
               <p 
