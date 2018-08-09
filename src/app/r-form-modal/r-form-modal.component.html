@@ -139,8 +139,7 @@
                     
                     ><!--required   #power="ngModel" [(ngModel)]="currentApp.position" [(ngModel)]="model.position"   NOTE: Change these IDs-->
                     <option 
-                      *ngFor="let position of positions" 
-                      [value]="position">
+                      *ngFor="let position of positions">
                       {{ position }}
                     </option>
                   </select>
@@ -220,7 +219,9 @@
                 Save
               </button>
               <p 
+                *ngIf="canDelete"
                 class="delete" 
+                (click)="submitForm(true)"
                 (click)="staticModal.hide()"><!--*ngIf="canDelete"   
                   (click)="submitForm(true)"  data-dismiss="modal"-->
                 Delete

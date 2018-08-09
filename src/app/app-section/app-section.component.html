@@ -1,4 +1,7 @@
-<p>
+<p >
   app-section works!
 </p>
-<app-details></app-details>
+<app-details
+  *ngFor="let sectionApp of sectionApps"
+  [app]="sectionApp">
+</app-details>

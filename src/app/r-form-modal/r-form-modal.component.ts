@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
@@ -15,15 +15,17 @@ export class RFormModalComponent {
   
   // description;
   //model = new App(1, 3, "Test App", "something.com", "Ima App, Yo!", "another.com", "onemore.com");
-
+ 
   // private newPosition = true;
   newSection: boolean = true;
   // private sectionBools = [ true, false ];
 
   //private apps: App[];
-  positions: number[] = [];
+  private positions: number[] = [];
+  @Output() numberOfSections = new EventEmitter<number[]>();
   //positions: number[] = [1,2,3,4,5,6,7];
   private appForm: FormGroup = null;
+  private canDelete: boolean = false;
 
   private currentApp = new App(null, null, null, null, null, null, null);
 
@@ -37,28 +39,21 @@ export class RFormModalComponent {
   getApps() {
     this.appService.getApps().subscribe(apps => {
       this.auditPositions(apps);
-      //console.log(apps);
     })
-
-    // for (let i = 0; i <= apps.length; ) {
-    //   if (apps[i].position) {}
-    //   this.positions.push(++i);
-    // }
   }
 
   auditPositions(apps) {
-    let pos = this.positions;
+    let pos = [1];
     apps.forEach(app => {
-      let p = app.position
-      if (!pos.includes(p)) {
-        for (let i = 0; i < apps.length; i++) {
-          if (pos[i] < p && p < pos[i+1]) {
-            pos.push(p);
-            pos.sort();
-          }
-        }
+      let p:number = app.position;
+      if (!pos.includes(p, 0)) {
+        pos.push(p);
+        pos.sort();
       }
     });
+    this.numberOfSections.emit(pos);
+    pos.push(pos.length + 1);
+    this.positions = pos;
   }
 
 
@@ -91,9 +86,8 @@ export class RFormModalComponent {
 
   
 
-  submitForm(/*deleteClick?: boolean*/) {
-    this.currentApp.position = this.appForm.value["position"];
-    //console.log(this.currentApp.position);
+  submitForm(deleteClick?: boolean) {
+    this.currentApp.position = +(this.appForm.value["position"]);
     this.currentApp.title = this.appForm.value["title"];
     this.currentApp.appUrl = this.appForm.value["appUrl"];
     this.currentApp.description = this.appForm.value["description"];
@@ -140,16 +134,12 @@ export class RFormModalComponent {
 
   cleanApp() {
     this.currentApp = new App(
-      null, 
-      null, 
-      null, 
-      null, 
-      null, 
-      null, 
-      null
+      null, null, null, null, null, null, null
     );
   }
 
+
+  // Extra position removed if app is to be added to a preexisting section.
   newSectionChange(newSection) {
     let p = this.positions;
     if (!newSection) {
