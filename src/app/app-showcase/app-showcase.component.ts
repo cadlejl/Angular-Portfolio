@@ -24,7 +24,7 @@ export class AppShowcaseComponent implements OnInit {
   constructor(public appService: AppService) {}
 
   ngOnInit() {
-    //this.getApps();
+    this.getApps();
   }
 
   // ngOnChanges() {
@@ -34,7 +34,6 @@ export class AppShowcaseComponent implements OnInit {
   
 
   assembleSections(sections) {
-    this.getApps();
     let a: App[] = [];
     sections.forEach(num => {
       this.apps.forEach(app => {
@@ -44,6 +43,7 @@ export class AppShowcaseComponent implements OnInit {
         number: num,
         apps: a
       })
+      a = [];
     });
   }
   

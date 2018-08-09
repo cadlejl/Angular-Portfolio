@@ -1,0 +1,23 @@
+hr {
+  /* width: 120%; */
+  margin: 0 -15%;
+  border: none;
+  background: rgb(162, 181, 202);
+  height: 1px;
+
+  /* display: block;
+  unicode-bidi: isolate;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  overflow: hidden; */
+  /* border-style: inset; */
+  /* border-width: 1px; */
+}
+
+
+.details {
+  /* margin: 200px; */
+  padding: 3rem 5rem;
+}

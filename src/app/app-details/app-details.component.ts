@@ -8,9 +8,11 @@ import { App } from '../model/app';
 })
 export class AppDetailsComponent implements OnInit {
   @Input() app: App;
+  private orientation;
   constructor() { }
 
   ngOnInit() {
+    this.orientation = this.app.position % 2;
   }
 
 }

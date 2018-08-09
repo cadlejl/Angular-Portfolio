@@ -8,12 +8,11 @@ import { Section } from '../model/section';
   styleUrls: ['./app-section.component.css']
 })
 export class AppSectionComponent implements OnInit, OnChanges {
-   //apps: App[];
+   apps: App[];
   //@Output() showcaseSections = new EventEmitter<number[]>();
   //private sectionApps: App[]; // Apps that go in one section
   @Input() section: Section;
-  
-  //private sectionNumbers: number[] = [1,2,3,4,5,6,7,8,9];
+
   
 
   // constructor() { console.log(this.section, 'sec-onchanges'); }
@@ -22,6 +21,8 @@ export class AppSectionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this.apps = this.section.apps;
+
     // console.log(this.section, 'sec-onchanges');
     // this.auditSections();
     // this.setApps();
