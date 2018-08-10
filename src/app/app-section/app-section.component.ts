@@ -12,7 +12,7 @@ export class AppSectionComponent implements OnInit, OnChanges {
   //@Output() showcaseSections = new EventEmitter<number[]>();
   //private sectionApps: App[]; // Apps that go in one section
   @Input() section: Section;
-
+  @Output() appToEdit = new EventEmitter<App>();
   
 
   // constructor() { console.log(this.section, 'sec-onchanges'); }
@@ -52,5 +52,7 @@ export class AppSectionComponent implements OnInit, OnChanges {
   //   });
   // }
   
-
+  edit(app: App) {
+    this.appToEdit.emit(app);
+  }
 }

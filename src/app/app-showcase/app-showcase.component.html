@@ -15,7 +15,8 @@
       </button> -->
       <!-- <td-form-modal></td-form-modal> -->
       <r-form-modal 
-        (numberOfSections)="assembleSections($event)">
+        (numberOfSections)="assembleSections($event)"
+        [appToEdit]="appToEdit">
       </r-form-modal>
     </div>
 
@@ -24,7 +25,7 @@
 <!-- <div *ngIf="apps"> -->
   <app-section
     *ngFor="let section of sections"
-    
+    (appToEdit)="appToEdit = $event"
     [section]="section">
   </app-section><!--*ngFor="let section of sections"  (showcaseSections)="sections = $event"-->
 <!-- </div> -->

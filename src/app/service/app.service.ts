@@ -40,4 +40,9 @@ export class AppService {
       gitHubUrl: app.gitHubUrl
     });
   }
+
+  // updateApp(app: App) {
+  //   this.afdb.object('apps/' + $event.key)
+  //     .update({completed: $event.completed});
+  // }
 }

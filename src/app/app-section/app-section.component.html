@@ -1,8 +1,9 @@
 <hr>
-<div class="details">
-<app-details
-  *ngFor="let app of apps"
-  [app]="app">
-</app-details>
-
+<div 
+  class="details" 
+  *ngFor="let app of apps">
+  <app-details 
+    [app]="app"
+    (appToEdit)="edit($event)">
+  </app-details>
 </div>

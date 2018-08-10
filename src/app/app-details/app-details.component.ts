@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { App } from '../model/app';
 
 @Component({
@@ -8,11 +8,15 @@ import { App } from '../model/app';
 })
 export class AppDetailsComponent implements OnInit {
   @Input() app: App;
+  @Output() appToEdit = new EventEmitter<App>();
   private orientation;
-  constructor() { }
 
   ngOnInit() {
     this.orientation = this.app.position % 2;
   }
 
+  edit(app: App) {
+    console.log(app.title);
+    this.appToEdit.emit(app);
+  }
 }

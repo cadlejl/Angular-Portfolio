@@ -30,7 +30,7 @@ textarea {
     resize: none;
 }
 
-.btn { /*should be reviewed for relevance*/
+.btn { /*should be reviewed for relevance. Probably should consolidate button styles later in styles.css*/
 	/* display: flex; */
 	align-items: center;
 	justify-content: center;

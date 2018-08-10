@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input, OnChanges } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
@@ -11,29 +11,23 @@ import { App } from "../model/app";
   templateUrl: /*'radio-button-modal.component.html'*/ './r-form-modal.component.html',
   styleUrls: ['./r-form-modal.component.css']
 })
-export class RFormModalComponent { 
-  
-  // description;
-  //model = new App(1, 3, "Test App", "something.com", "Ima App, Yo!", "another.com", "onemore.com");
- 
-  // private newPosition = true;
+export class RFormModalComponent implements OnInit, OnChanges { 
   newSection: boolean = true;
-  // private sectionBools = [ true, false ];
-
-  //private apps: App[];
   private positions: number[] = [];
   @Output() numberOfSections = new EventEmitter<number[]>();
-  //positions: number[] = [1,2,3,4,5,6,7];
   private appForm: FormGroup = null;
   private canDelete: boolean = false;
-
   private currentApp = new App(null, null, null, null, null, null, null);
+  @Input() appToEdit = new App;
 
   constructor(private formB: FormBuilder, private appService: AppService) { }
 
   ngOnInit() {
     this.getApps();
     this.configureForm();
+  }
+
+  ngOnChanges() {
   }
 
   getApps() {
@@ -52,12 +46,9 @@ export class RFormModalComponent {
       }
     });
     this.numberOfSections.emit(pos);
-    pos.push(pos.length + 1);
+    pos.push(pos.length + 1); 
     this.positions = pos;
   }
-
-
-
 
   // Modeled after bugged-out-rebuild.bug-detail.component
   configureForm(app?: App) {
@@ -83,8 +74,6 @@ export class RFormModalComponent {
       gitHubUrl: [this.currentApp.gitHubUrl/*, Validators.required*/]
     });
   }
-
-  
 
   submitForm(deleteClick?: boolean) {
     this.currentApp.position = +(this.appForm.value["position"]);
@@ -123,8 +112,13 @@ export class RFormModalComponent {
 		this.freshForm();
   }
 
+  // updateApp() {
+	// 	this.appService.updateApp(this.currentApp);
+	// 	this.freshForm();
+  // }
+
   freshForm() {
-    this.appForm.reset(/*{ 
+    this.appForm.reset(/*{ from bug tracking app
 			status: this.statuses.Logged, 
 			severity: this.severities.Severe 
     }*/);
@@ -137,7 +131,6 @@ export class RFormModalComponent {
       null, null, null, null, null, null, null
     );
   }
-
 
   // Extra position removed if app is to be added to a preexisting section.
   newSectionChange(newSection) {
