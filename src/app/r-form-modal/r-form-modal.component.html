@@ -1,7 +1,7 @@
 <button 
   type="button" 
   class="btn btn-primary" 
-  (click)="staticModal.show()">
+  (click)="isModalShown = true; freshForm()"><!--showModal() staticModal.show()-->
   Add App
 </button>
 
@@ -13,12 +13,14 @@
 </div> -->
 
 
- 
+<!-- (onHidden)="onHidden()"" -->
 <div 
+  *ngIf="isModalShown"
+  (onHidden)="isModalShown = false"
   class="modal fade" 
   bsModal  
   #staticModal="bs-modal" 
-  [config]="{backdrop: 'static'}"
+  [config]="{backdrop: 'static', show: true}"
   tabindex="-1" 
   role="dialog" 
   aria-labelledby="dialog-static-name">
@@ -207,7 +209,7 @@
               <button 
                 type="button" 
                 class="btn btn-primary"
-                (click)="staticModal.hide()">
+                (click)="staticModal.hide(); freshForm()">
                 Cancel
               </button>
               <button 
@@ -222,7 +224,7 @@
                 *ngIf="canDelete"
                 class="delete" 
                 (click)="submitForm(true)"
-                (click)="staticModal.hide()"><!--*ngIf="canDelete"   
+                (click)="staticModal.hide(); modalShow = false"><!--*ngIf="canDelete"   
                   (click)="submitForm(true)"  data-dismiss="modal"-->
                 Delete
               </p>

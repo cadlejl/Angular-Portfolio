@@ -16,7 +16,6 @@ export class AppDetailsComponent implements OnInit {
   }
 
   edit(app: App) {
-    console.log(app.title);
     this.appToEdit.emit(app);
   }
 }

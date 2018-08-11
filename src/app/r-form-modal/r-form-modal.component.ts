@@ -1,10 +1,12 @@
-import { Component, Output, EventEmitter, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { AppService } from "../service/app.service";
 
 import { App } from "../model/app";
+
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'r-form-modal',
@@ -18,7 +20,12 @@ export class RFormModalComponent implements OnInit, OnChanges {
   private appForm: FormGroup = null;
   private canDelete: boolean = false;
   private currentApp = new App(null, null, null, null, null, null, null);
-  @Input() appToEdit = new App;
+  @Input() appToEdit: App;
+  @Output() edited = new EventEmitter<App>();
+
+  @ViewChild('staticModal') staticModal: ModalDirective;
+  private isModalShown: boolean = false;
+
 
   constructor(private formB: FormBuilder, private appService: AppService) { }
 
@@ -27,8 +34,22 @@ export class RFormModalComponent implements OnInit, OnChanges {
     this.configureForm();
   }
 
+  //*** EDIT: This should work for now as long as editing is all I'm using OnChanges for.
   ngOnChanges() {
+    // console.log(this.appToEdit);
+    this.configureForm(this.appToEdit);
+    if (this.appToEdit) this.isModalShown = true;
   }
+  // ngx-bootstrap modal methods set in template
+  // showModal(): void {
+  //   this.isModalShown = true;
+  // }
+  // hideModal(): void {
+  //   this.staticModal.hide();
+  // }
+  // onHidden(): void {
+  //   this.isModalShown = false;
+  // }
 
   getApps() {
     this.appService.getApps().subscribe(apps => {
@@ -87,15 +108,15 @@ export class RFormModalComponent implements OnInit, OnChanges {
     differece between the two is an edited bug has an id (firebase key),
     and an added bug does not. Therefore: */
     if (this.currentApp.id) {
-			// if (deleteClick) {
-			// 	if (confirm(
-			// 		"Are you sure you want to permanently delete this app?"
-			// 	)) {
-			// 	this.removeBug();
-			// 	}
-			// } else {
-			// 		this.updateBug();
-      //   }
+			if (deleteClick) {
+				if (confirm(
+					"Are you sure you want to permanently delete this app?"
+				)) {
+				// this.removeBug();
+				}
+			} else {
+					this.updateApp();
+        }
         //this.updateBug(); not sure why this is here.
     } else {
         this.addApp();
@@ -112,10 +133,11 @@ export class RFormModalComponent implements OnInit, OnChanges {
 		this.freshForm();
   }
 
-  // updateApp() {
-	// 	this.appService.updateApp(this.currentApp);
-	// 	this.freshForm();
-  // }
+  updateApp() {
+    // console.log(this.currentApp.id);
+		 this.appService.updateApp(this.currentApp);
+    this.freshForm();
+  }
 
   freshForm() {
     this.appForm.reset(/*{ from bug tracking app
@@ -127,9 +149,9 @@ export class RFormModalComponent implements OnInit, OnChanges {
   }
 
   cleanApp() {
-    this.currentApp = new App(
-      null, null, null, null, null, null, null
-    );
+    this.currentApp = new App(null, null, null, null, null, null, null);
+    this.appToEdit = new App(null, null, null, null, null, null, null);
+    this.edited.emit(this.appToEdit);
   }
 
   // Extra position removed if app is to be added to a preexisting section.
