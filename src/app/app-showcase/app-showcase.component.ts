@@ -47,12 +47,12 @@ export class AppShowcaseComponent implements OnInit {
     this.appService.getApps().subscribe(serviceApps => {
       this.apps = serviceApps;
       
-      // this.appService.getKeys().subscribe(serviceKeys => {
-      //   this.keys = serviceKeys;
-      //   for (let i = 0; i < this.apps.length; i++) {
-      //     this.apps[i].id = this.keys[i].key;
-      //   }
-      // })
+      this.appService.getKeys().subscribe(serviceKeys => {
+        this.keys = serviceKeys;
+        for (let i = 0; i < this.apps.length; i++) {
+          this.apps[i].id = this.keys[i].key;
+        }
+      })
     });
   }
 }

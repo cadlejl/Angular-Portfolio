@@ -71,7 +71,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
   // Modeled after bugged-out-rebuild.bug-detail.component
   configureForm(editApp?: App) {
     if (editApp) {
-      //this.canDelete = true;
+      this.canDelete = true;
+      console.log(editApp);
       this.currentApp = new App(
         editApp.id,
         editApp.position,
@@ -84,7 +85,7 @@ export class RFormModalComponent implements OnInit, OnChanges {
     }
 
     this.appForm = this.formB.group({
-      position: [ this.currentApp.position,Validators.required ],
+      position: [ this.currentApp.position/*,Validators.required*/ ],
       title: [ this.currentApp.title,Validators.required ],
       appUrl: [this.currentApp.appUrl, Validators.required],
       description: [this.currentApp.description, Validators.required],
@@ -100,16 +101,16 @@ export class RFormModalComponent implements OnInit, OnChanges {
     this.currentApp.description = this.appForm.value["description"];
     this.currentApp.imgUrl = this.appForm.value["imgUrl"];
     this.currentApp.gitHubUrl = this.appForm.value["gitHubUrl"];
-
+    console.log(this.currentApp.id);
     /* Now, how do we differentiate between adding and editing a bug? A key 
     differece between the two is an edited bug has an id (firebase key),
     and an added bug does not. Therefore: */
-    if (this.currentApp.id) {
-			if (deleteClick) {
+    if (this.currentApp.id) {console.log(this.currentApp.id);
+			if (deleteClick) { console.log(deleteClick);
 				if (confirm(
 					"Are you sure you want to permanently delete this app?"
 				)) {
-				// this.removeBug();
+				this.removeApp();
 				}
 			} else {
 					this.updateApp();
@@ -133,6 +134,10 @@ export class RFormModalComponent implements OnInit, OnChanges {
   updateApp() {
     this.appService.updateApp(this.currentApp);
     this.freshForm();
+  }
+
+  removeApp() {
+    this.appService.removeApp(this.currentApp);
   }
 
   freshForm() {

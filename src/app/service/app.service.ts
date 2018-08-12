@@ -9,26 +9,26 @@ import { App } from "../model/app";
 @Injectable({ providedIn: 'root' })
 export class AppService {
 	private apps: Observable<any[]>;
-	// private keys: Observable<any[]>;
+	private keys: Observable<any[]>;
 
 	constructor(/*public in sticky notes*/private afdb: AngularFireDatabase) {
     this.apps = afdb.list('/apps/').valueChanges();
 
-		// this.keys = afdb.list<App[]>('apps')
-		// 	.snapshotChanges().pipe(
-		// 		map(actions => actions.map(a => ({
-		// 			key: a.key
-		// 		})))
-		// 	);
+		this.keys = afdb.list<App[]>('apps')
+			.snapshotChanges().pipe(
+				map(actions => actions.map(a => ({
+					key: a.key
+				})))
+			);
 	}
 
 	getApps() {
 		return this.apps;
 	}
 
-	// getKeys() {
-	// 	return this.keys;
-  // }
+	getKeys() {
+		return this.keys;
+  }
   
   addApp(app: App) {
     this.afdb.list('apps').push({
@@ -51,5 +51,9 @@ export class AppService {
       imgUrl: app.imgUrl,
       gitHubUrl: app.gitHubUrl
     });
+  }
+
+  removeApp(app) {
+    this.afdb.list('apps').remove(app.id);
   }
 }
