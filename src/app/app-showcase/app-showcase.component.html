@@ -15,13 +15,11 @@
       </button> -->
       <!-- <td-form-modal></td-form-modal> -->
 
-
       <r-form-modal 
         (numberOfSections)="assembleSections($event)"
         [appToEdit]="appToEdit"
-        (edited)="appToEdit = $event">
+        (wasEdited)="appToEdit = $event">
       </r-form-modal>
-
 
     </div>
 

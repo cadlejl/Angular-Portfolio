@@ -8,22 +8,20 @@ import { Section } from '../model/section';
   styleUrls: ['./app-section.component.css']
 })
 export class AppSectionComponent implements OnInit, OnChanges {
-   apps: App[];
+  apps: App[];
   //@Output() showcaseSections = new EventEmitter<number[]>();
   //private sectionApps: App[]; // Apps that go in one section
   @Input() section: Section;
   @Output() appToEdit = new EventEmitter<App>();
   
 
-  // constructor() { console.log(this.section, 'sec-onchanges'); }
+  
   ngOnInit() { 
-    // console.log(this.section, 'sec-onchanges'); 
   }
 
   ngOnChanges() {
     this.apps = this.section.apps;
 
-    // console.log(this.section, 'sec-onchanges');
     // this.auditSections();
     // this.setApps();
     //this.showcaseSections.emit(this.sectionNumbers);

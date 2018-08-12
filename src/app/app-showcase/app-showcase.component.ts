@@ -26,16 +26,10 @@ export class AppShowcaseComponent implements OnInit {
 
   ngOnInit() {
     this.getApps();
-    console.log(this.apps);
   }
 
-  // ngOnChanges() {
-  //   console.log(this.showcaseNumberOfSections);
-  //   this.assembleSections();
-  // }
-  
-
   assembleSections(sections) {
+    this.sections = []; // Holds its value until reset here.
     let a: App[] = [];
     sections.forEach(num => {
       this.apps.forEach(app => {
@@ -52,14 +46,13 @@ export class AppShowcaseComponent implements OnInit {
   getApps() {
     this.appService.getApps().subscribe(serviceApps => {
       this.apps = serviceApps;
-      // console.log(this.apps);
+      
       // this.appService.getKeys().subscribe(serviceKeys => {
       //   this.keys = serviceKeys;
       //   for (let i = 0; i < this.apps.length; i++) {
       //     this.apps[i].id = this.keys[i].key;
       //   }
-      //   //console.log(this.apps, 'showcase');
       // })
-    })
+    });
   }
 }

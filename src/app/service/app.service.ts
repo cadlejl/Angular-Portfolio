@@ -13,7 +13,6 @@ export class AppService {
 
 	constructor(/*public in sticky notes*/private afdb: AngularFireDatabase) {
     this.apps = afdb.list('/apps/').valueChanges();
-    
 
 		// this.keys = afdb.list<App[]>('apps')
 		// 	.snapshotChanges().pipe(

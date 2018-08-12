@@ -21,11 +21,9 @@ export class RFormModalComponent implements OnInit, OnChanges {
   private canDelete: boolean = false;
   private currentApp = new App(null, null, null, null, null, null, null);
   @Input() appToEdit: App;
-  @Output() edited = new EventEmitter<App>();
-
+  @Output() wasEdited = new EventEmitter<App>();
   @ViewChild('staticModal') staticModal: ModalDirective;
   private isModalShown: boolean = false;
-
 
   constructor(private formB: FormBuilder, private appService: AppService) { }
 
@@ -36,7 +34,6 @@ export class RFormModalComponent implements OnInit, OnChanges {
 
   //*** EDIT: This should work for now as long as editing is all I'm using OnChanges for.
   ngOnChanges() {
-    // console.log(this.appToEdit);
     this.configureForm(this.appToEdit);
     if (this.appToEdit) this.isModalShown = true;
   }
@@ -72,17 +69,17 @@ export class RFormModalComponent implements OnInit, OnChanges {
   }
 
   // Modeled after bugged-out-rebuild.bug-detail.component
-  configureForm(app?: App) {
-    if (app) {
+  configureForm(editApp?: App) {
+    if (editApp) {
       //this.canDelete = true;
       this.currentApp = new App(
-        app.id,
-        app.position,
-        app.title,
-        app.appUrl,
-        app.description,
-        app.imgUrl,
-        app.gitHubUrl
+        editApp.id,
+        editApp.position,
+        editApp.title,
+        editApp.appUrl,
+        editApp.description,
+        editApp.imgUrl,
+        editApp.gitHubUrl
       );
     }
 
@@ -134,8 +131,7 @@ export class RFormModalComponent implements OnInit, OnChanges {
   }
 
   updateApp() {
-    // console.log(this.currentApp.id);
-		 this.appService.updateApp(this.currentApp);
+    this.appService.updateApp(this.currentApp);
     this.freshForm();
   }
 
@@ -150,8 +146,10 @@ export class RFormModalComponent implements OnInit, OnChanges {
 
   cleanApp() {
     this.currentApp = new App(null, null, null, null, null, null, null);
-    this.appToEdit = new App(null, null, null, null, null, null, null);
-    this.edited.emit(this.appToEdit);
+    if (this.appToEdit){
+      this.appToEdit = new App(null, null, null, null, null, null, null);
+      this.wasEdited.emit(this.appToEdit);
+    }
   }
 
   // Extra position removed if app is to be added to a preexisting section.
