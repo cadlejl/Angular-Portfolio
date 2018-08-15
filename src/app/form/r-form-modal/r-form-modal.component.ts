@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AppService } from "../../service/app.service";
 import { PositionsService } from "../form-services/positions.service";
 import { SectionChangeService } from "../form-services/section-change.service";
+import { FormConfigurationService } from "../form-services/form-configuration.service";
 
 import { App } from "../../model/app";
 
@@ -34,7 +35,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
     private formB: FormBuilder, 
     private appService: AppService,
     private positionService: PositionsService,
-    private sectionChangeService: SectionChangeService
+    private sectionChangeService: SectionChangeService,
+    private formConfigurationService: FormConfigurationService
   ) { }
 
   ngOnInit() {
@@ -80,29 +82,17 @@ export class RFormModalComponent implements OnInit, OnChanges {
     this.positions = this.sectionChangeService.newSectionChange(newSection, this.positions);
   }
 
-  // Modeled after bugged-out-rebuild.bug-detail.component
-  configureForm(editApp?: App) {
-    if (editApp) {
+  // Optional parameter from app-details
+  configureForm(appToEdit?: App) {
+    if (appToEdit) {
       this.canDelete = true;
-      this.currentApp = new App(
-        editApp.id,
-        editApp.position,
-        editApp.title,
-        editApp.appUrl,
-        editApp.description,
-        editApp.imgUrl,
-        editApp.gitHubUrl
-      );
+
+      // If editing, pass app as currentApp to populate form.
+      this.currentApp = this.formConfigurationService.configureCurrentApp(appToEdit);
     }
 
-    this.appForm = this.formB.group({
-      position: [ this.currentApp.position/*,Validators.required*/ ],
-      title: [ this.currentApp.title,Validators.required ],
-      appUrl: [this.currentApp.appUrl, Validators.required],
-      description: [this.currentApp.description, Validators.required],
-      imgUrl: [this.currentApp.imgUrl/*, Validators.required*/],
-      gitHubUrl: [this.currentApp.gitHubUrl/*, Validators.required*/]
-    });
+    // Configure app properties into a FormBuilder group.
+    this.appForm = this.formConfigurationService.configureForm(this.currentApp, this.formB);
   }
 
   submitForm(deleteClick?: boolean) {
