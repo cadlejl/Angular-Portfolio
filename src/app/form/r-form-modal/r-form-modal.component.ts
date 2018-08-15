@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { AppService } from "../../service/app.service";
 import { PositionsService } from "../form-services/positions.service";
+import { SectionChangeService } from "../form-services/section-change.service";
 
 import { App } from "../../model/app";
 
@@ -32,7 +33,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
   constructor(
     private formB: FormBuilder, 
     private appService: AppService,
-    private positionService: PositionsService
+    private positionService: PositionsService,
+    private sectionChangeService: SectionChangeService
   ) { }
 
   ngOnInit() {
@@ -74,13 +76,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
   }
 
   // Extra position removed if app is to be added to a preexisting section.
-  newSectionChange(newSection) {
-    let p = this.positions;
-    if (!newSection) {
-      p.pop();
-    }
-    else p.push(p.length + 1);
-    this.positions = p;
+  newSectionChange(newSection: boolean) {
+    this.positions = this.sectionChangeService.newSectionChange(newSection, this.positions);
   }
 
   // Modeled after bugged-out-rebuild.bug-detail.component
