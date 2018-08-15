@@ -9,7 +9,7 @@ import { App } from "../model/app";
 @Injectable({ providedIn: 'root' })
 export class AppService {
 	private apps: Observable<any[]>;
-	private keys: Observable<any[]>;
+  private keys: Observable<any[]>;
 
 	constructor(/*public in sticky notes*/private afdb: AngularFireDatabase) {
     this.apps = afdb.list('/apps/').valueChanges();
@@ -17,10 +17,10 @@ export class AppService {
 		this.keys = afdb.list<App[]>('apps')
 			.snapshotChanges().pipe(
 				map(actions => actions.map(a => ({
-					key: a.key
+          key: a.key
 				})))
 			);
-	}
+  }
 
 	getApps() {
 		return this.apps;
@@ -43,7 +43,7 @@ export class AppService {
 
   updateApp(app: App) {
     this.afdb.object('apps/' + app.id).update({
-      id: app.id,
+      //id: app.id,
       position: app.position,
       title: app.title,
       appUrl: app.appUrl,

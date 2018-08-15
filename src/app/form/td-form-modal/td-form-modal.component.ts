@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { App } from "../model/app";
+import { App } from "../../model/app";
 
 @Component({
   selector: 'td-form-modal',

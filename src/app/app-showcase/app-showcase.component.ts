@@ -17,7 +17,7 @@ export class AppShowcaseComponent implements OnInit {
   private showcaseNumberOfSections: number[];
   private sections: Section[] = [];
   private currentApp = new App(null, null, null, null, null, null, null);
-  private keys;
+  private keys = [];
   private appToEdit: App;
   //public appAdded = false;
 
@@ -42,6 +42,21 @@ export class AppShowcaseComponent implements OnInit {
       a = [];
     });
   }
+
+  // positionShift(newPosition: number) {
+  //   this.apps.forEach(app => {
+  //     if (app.position >= newPosition) {
+  //       app.position += 1;
+  //       this.updateBoogerApp(app);
+  //     }
+  //   });
+  // }
+
+  // updateBoogerApp(app) {
+    
+  //   this.appService.updateApp(app);
+  // }
+
   
   getApps() {
     this.appService.getApps().subscribe(serviceApps => {

@@ -104,7 +104,7 @@
                     class="px-3" 
                     [value]="false" 
                     labelPosition="before">No</mat-radio-button>
-                </mat-radio-group>
+                </mat-radio-group><!--; appForm.value['position']=null-->
 
 
               </div>
@@ -133,23 +133,21 @@
               <div id="positionLabel" class="col-4">
                 <div class="form-group">
                   <label for="position" class="placement mr-2">Display Position</label>
+                  
                   <select 
                     class="form-control placement" 
                     id="position"
                     formControlName="position"
+                    (change)="positionChanged = true"><!--(change)="positionChanged = true"-->
                     
-                    
-                    ><!--required   #power="ngModel" [(ngModel)]="currentApp.position" [(ngModel)]="model.position"   NOTE: Change these IDs-->
+                    <option style="display:none"></option>
+
                     <option 
                       *ngFor="let position of positions">
                       {{ position }}
                     </option>
                   </select>
-                  <!-- <div 
-                    [hidden]="position.valid || position.pristine" 
-                    class="alert alert-danger">
-                    Power is required
-                  </div> -->
+
                 </div>
               </div>
 
@@ -159,6 +157,7 @@
                   <input 
                     type="text" 
                     class="form-control" 
+                    formControlName="gitHubUrl"
                     placeholder="GitHub URL"><!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"

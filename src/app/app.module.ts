@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ModalModule, ButtonsModule } from "ngx-bootstrap";
+import { ModalModule, ButtonsModule/*, BsDropdownModule*/  } from "ngx-bootstrap";
 
 import { FormsModule } from "@angular/forms"; // Uncomment for TDForms
 import { ReactiveFormsModule } from "@angular/forms";
@@ -19,8 +19,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppShowcaseComponent } from './app-showcase/app-showcase.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
-//import { TDFormModalComponent } from './td-form-modal/td-form-modal.component';
-import { RFormModalComponent } from "./r-form-modal/r-form-modal.component";
+//import { TDFormModalComponent } from './form/td-form-modal/td-form-modal.component';
+import { RFormModalComponent } from "./form/r-form-modal/r-form-modal.component";
 import { AppSectionComponent } from './app-section/app-section.component';
 
 @NgModule({
@@ -41,6 +41,7 @@ import { AppSectionComponent } from './app-section/app-section.component';
     MatRadioModule,
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
+    //BsDropdownModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase /*,'my-app-name'*/)
   ],
