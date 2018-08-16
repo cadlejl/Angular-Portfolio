@@ -7,6 +7,7 @@ import { PositionsService } from "../form-services/positions.service";
 import { SectionChangeService } from "../form-services/section-change.service";
 import { FormConfigurationService } from "../form-services/form-configuration.service";
 import { FormSubmissionService } from "../form-services/form-submission.service";
+import { AppAddingService } from "../form-services/app-adding.service";
 
 import { App } from "../../model/app";
 
@@ -38,7 +39,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
     private positionService: PositionsService,
     private sectionChangeService: SectionChangeService,
     private formConfigurationService: FormConfigurationService,
-    private formSubmissionService: FormSubmissionService
+    private formSubmissionService: FormSubmissionService,
+    private appAddingService: AppAddingService
   ) { }
 
   ngOnInit() {
@@ -121,15 +123,15 @@ export class RFormModalComponent implements OnInit, OnChanges {
     }
   }
 
-  addApp(editApp?: App) {
-    if (!editApp) {
-      this.appService.addApp(this.currentApp);
+  addApp(/*editApp?: App*/) {
+    // if (!editApp) {
+      this.appAddingService.addApp(this.currentApp);
       this.freshForm();
-    } 
-    else {
-      this.positionShift(editApp.position)
-      this.appService.addApp(editApp);
-    }
+    // } 
+    // else {
+    //   this.positionShift(editApp.position);
+    //   this.appAddingService.addApp(editApp);
+    // }
   }
 
   updateApp(app?: App, positionChanged?: boolean) {
@@ -148,7 +150,7 @@ export class RFormModalComponent implements OnInit, OnChanges {
       }
     });
     editApp.id = null;
-    this.addApp(editApp);
+    // this.addApp(editApp);
   }
 
   positionShift(shiftPosition: number, deleting?: boolean) {
