@@ -6,9 +6,6 @@ import { App } from "../../model/app";
   providedIn: 'root'
 })
 export class PositionsService {
-
-  constructor() { }
-
   setPositions(apps: App[]) {
     let pos = [1];
     apps.forEach(app => {
@@ -19,8 +16,5 @@ export class PositionsService {
       }
     });
     return pos;
-    // this.numberOfSections.emit(pos);
-    // if (this.apps.length > 0) pos.push(pos.length + 1); 
-    // this.positions = pos;
   }
 }

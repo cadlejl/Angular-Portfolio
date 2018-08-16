@@ -6,6 +6,7 @@ import { AppService } from "../../service/app.service";
 import { PositionsService } from "../form-services/positions.service";
 import { SectionChangeService } from "../form-services/section-change.service";
 import { FormConfigurationService } from "../form-services/form-configuration.service";
+import { FormSubmissionService } from "../form-services/form-submission.service";
 
 import { App } from "../../model/app";
 
@@ -36,7 +37,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
     private appService: AppService,
     private positionService: PositionsService,
     private sectionChangeService: SectionChangeService,
-    private formConfigurationService: FormConfigurationService
+    private formConfigurationService: FormConfigurationService,
+    private formSubmissionService: FormSubmissionService
   ) { }
 
   ngOnInit() {
@@ -96,22 +98,14 @@ export class RFormModalComponent implements OnInit, OnChanges {
   }
 
   submitForm(deleteClick?: boolean) {
-    this.currentApp.position = +(this.appForm.value["position"]);
-    this.currentApp.title = this.appForm.value["title"];
-    this.currentApp.appUrl = this.appForm.value["appUrl"];
-    this.currentApp.description = this.appForm.value["description"];
-    this.currentApp.imgUrl = this.appForm.value["imgUrl"];
-    this.currentApp.gitHubUrl = this.appForm.value["gitHubUrl"];
+    this.currentApp = this.formSubmissionService.receiveFormValues(this.appForm);
 
     if (this.currentApp.id) {
 			if (deleteClick) { 
-				if (confirm(
-					"Are you sure you want to permanently delete this app?"
-				)) {
+				if (confirm("Are you sure you want to permanently delete this app?")) {
 				this.removeApp(this.currentApp.position);
 				}
-      } 
-      else {
+      } else {
           // let a = this.currentApp;
           // this.removeApp(this.currentApp.position);
           // this.currentApp = a;
@@ -119,8 +113,7 @@ export class RFormModalComponent implements OnInit, OnChanges {
           if (this.positionChanged) this.changePositions();
           this.updateApp(null,this.positionChanged);
         }
-    } 
-    else {
+    } else {
         if (this.newSection) {
           this.positionShift(this.currentApp.position);
         }
