@@ -34,10 +34,10 @@ export class AppService {
     this.afdb.list('apps').push({
       position: app.position,
       title: app.title,
-      appUrl: app.appUrl,
-      description: app.description,
-      imgUrl: app.imgUrl,
-      gitHubUrl: app.gitHubUrl
+      // appUrl: app.appUrl,
+      // description: app.description,
+      // imgUrl: app.imgUrl,
+      // gitHubUrl: app.gitHubUrl
     });
   }
 
@@ -46,10 +46,10 @@ export class AppService {
       //id: app.id,
       position: app.position,
       title: app.title,
-      appUrl: app.appUrl,
-      description: app.description,
-      imgUrl: app.imgUrl,
-      gitHubUrl: app.gitHubUrl
+      // appUrl: app.appUrl,
+      // description: app.description,
+      // imgUrl: app.imgUrl,
+      // gitHubUrl: app.gitHubUrl
     });
   }
 

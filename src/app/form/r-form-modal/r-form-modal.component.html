@@ -55,12 +55,12 @@
             <div class="col-6">
                 <div class="form-group">
                   <label for="appUrl" class="sr-only">App URL</label>
-                  <input 
+                  <!-- <input 
                     type="text" 
                     class="form-control" 
                     required
                     formControlName="appUrl"
-                    placeholder="App URL">
+                    placeholder="App URL"> -->
                   <!-- <div 
                     [hidden]="appUrl.valid || appUrl.pristine"
                     class="alert alert-danger">
@@ -113,11 +113,12 @@
             <div class="col-6">
                 <div class="form-group">
                   <label for="imgUrl" class="sr-only">Image URL</label>
-                  <input 
+                  <!-- <input 
                     type="text" 
                     class="form-control" 
                     formControlName="imgUrl"
-                    placeholder="Image URL"><!--required-->
+                    placeholder="Image URL"> -->
+                    <!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"
                     class="alert alert-danger">
@@ -154,11 +155,12 @@
               <div class="col-6 offset-2">
                 <div class="form-group">
                   <label for="gitHubUrl" class="sr-only">GitHub URL</label>
-                  <input 
+                  <!-- <input 
                     type="text" 
                     class="form-control" 
                     formControlName="gitHubUrl"
-                    placeholder="GitHub URL"><!--required-->
+                    placeholder="GitHub URL"> -->
+                    <!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"
                     class="alert alert-danger">
@@ -184,10 +186,10 @@
               <textarea 
                 id="description"
                 rows="6"
-                required
+                
                 class="form-control"
                 formControlName="description"
-                placeholder="App Description"></textarea><!--formControlName="description"   [(ngModel)]="app.description"
+                placeholder="App Description"></textarea><!-- required formControlName="description"   [(ngModel)]="app.description"
                   name="description"
                   #description="ngModel" 
                 formControlName="description"-->
@@ -222,8 +224,8 @@
               <p 
                 *ngIf="canDelete"
                 class="delete" 
-                (click)="submitForm(true)"
-                (click)="staticModal.hide(); modalShow = false"><!--*ngIf="canDelete"   
+                (click)="submitForm(true); staticModal.hide(); modalShow = false"><!--; modalShow = false
+                  *ngIf="canDelete"   
                   (click)="submitForm(true)"  data-dismiss="modal"-->
                 Delete
               </p>

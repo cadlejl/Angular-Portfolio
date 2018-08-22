@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { App } from "../../model/app";
+//import { App } from "../../model/app";
 
 @Component({
   selector: 'td-form-modal',
@@ -8,14 +8,14 @@ import { App } from "../../model/app";
   styleUrls: ['./td-form-modal.component.css']
 })
 export class TDFormModalComponent { 
-  positions: number[] = [1,2,3,4,5,6,7];
+  //positions: number[] = [1,2,3,4,5,6,7];
   // description;
 
-  model = new App(1, 3, "Test App", "something.com", "Ima App, Yo!", "another.com", "onemore.com");
+  //model = new App(1, 3, "Test App", "something.com", "Ima App, Yo!", "another.com", "onemore.com");
 
-  private newPosition = true;
+  //private newPosition = true;
 
-  private currentApp = new App(null, null, null, null, null, null, null);
+  //private currentApp = new App(null, null, null, null, null, null, null);
 
   // constructor() {
   //   this.description = this.model.description;

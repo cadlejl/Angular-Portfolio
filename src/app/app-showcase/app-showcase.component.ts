@@ -16,7 +16,7 @@ export class AppShowcaseComponent implements OnInit {
   private apps: App[] = [];
   private showcaseNumberOfSections: number[];
   private sections: Section[] = [];
-  private currentApp = new App(null, null, null, null, null, null, null);
+  private currentApp = new App(null, null, null/*, null, null, null, null*/);
   private keys = [];
   private appToEdit: App;
   //public appAdded = false;

@@ -15,7 +15,7 @@ export class AppDetailsComponent implements OnInit {
     this.orientation = this.app.position % 2;
   }
 
-  edit(app: App) {
-    this.appToEdit.emit(app);
+  edit() {
+    this.appToEdit.emit(this.app);
   }
 }

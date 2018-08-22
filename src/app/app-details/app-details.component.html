@@ -1,18 +1,13 @@
 <div *ngIf="orientation !== 0">
   <div class="row">
     <div class="col-5 my-auto text-center">
-      <!-- <img [src]="app.imgUrl" alt=""> -->
-      <img src="assets/bug-tracking_prnt-scrn.jpg" alt="" width="425px">
+      <!-- <img [src]="app.imgUrl" alt="" width="450px"> -->
+      <!-- <img src="assets/bug-tracking_prnt-scrn.jpg" alt="" width="425px"> -->
     </div>
     <div class="col-5  offset-1">
       <div class="text-headline">{{ app.title }} Position: {{ app.position }}</div>
       <p>{{ app.description }}Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tristique tortor eget viverra. Quisque feugiat gravida lorem, in mattis neque vehicula nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.   Donec bibendum odio non felis placerat venenatis.</p>
-      <a 
-        class="btn btn-primary" 
-        [href]="app.appUrl" 
-        target="_blank">
-        Open
-      </a>
+      <a class="btn btn-primary" [href]="app.appUrl" target="_blank">Open</a>
       <button type="button" class="btn btn-primary" (click)="edit(app)">Edit</button>
     </div>
   </div>
@@ -23,17 +18,12 @@
     <div class="col-5">
       <div class="text-headline">{{ app.title }} Position: {{ app.position }}</div>
       <p>{{ app.description }}Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tristique tortor eget viverra. Quisque feugiat gravida lorem, in mattis neque vehicula nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec bibendum odio non felis placerat venenatis.</p>
-      <a 
-        class="btn btn-primary" 
-        [href]="app.appUrl" 
-        target="_blank">
-        Open
-      </a>
-      <button type="button" class="btn btn-primary" (click)="edit(app)">Edit</button>
+      <a class="btn btn-primary" [href]="app.appUrl" target="_blank">Open</a>
+      <button type="button" class="btn btn-primary" (click)="edit()">Edit</button>
     </div>
     <div class="col-5 offset-1 my-auto text-center">
-      <!-- <img [src]="app.imgUrl" alt=""> -->
-      <img src="assets/bug-tracking_prnt-scrn.jpg" alt="" width="400px">
+      <!-- <img [src]="app.imgUrl" alt="" width="450px"> -->
+      <!-- <img src="assets/bug-tracking_prnt-scrn.jpg" alt="" width="400px"> -->
     </div>
   </div>
 </div>
