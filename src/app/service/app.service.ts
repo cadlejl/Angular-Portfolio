@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { AngularFireDatabase } from "angularfire2/database";
 
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
 import { App } from "../model/app";
 
@@ -22,6 +22,43 @@ export class AppService {
 			);
   }
 
+  // EXPERIMENTAL: PositionShiftingService.positionShift() needs the new app just added in order to add it to the apps array so it can be shifted with the others.
+  getNewAppId() {
+    const newAppId = this.afdb.createPushId();
+    return newAppId;
+  }
+
+
+  /* Called by PositionChangingService.addApp():  I am bypassing app adding service for expediency to get the new id I need for shifting the moved app with the rest of the apps */
+  //private newAppId;
+
+  // public observableAppId = Observable.create(
+  //   observer => { observer.next(this.newAppId)/*; observer.complete()*/ });
+
+    public subject = new BehaviorSubject(null);
+
+  addAppWithId(app: App) {
+    const newAppId = this.afdb.createPushId();
+
+    this.afdb.list('apps').set(newAppId, {
+      position: app.position,
+      title: app.title,
+      appUrl: app.appUrl,
+      description: app.description,
+      imgUrl: app.imgUrl,
+      gitHubUrl: app.gitHubUrl
+    });
+    console.log(app, 'appService')
+    return newAppId;
+    
+    // 2. this.subject.next(newAppId);
+    // this.subject.next(newApp);
+  }
+
+
+
+
+
 	getApps() {
 		return this.apps;
 	}
@@ -34,10 +71,10 @@ export class AppService {
     this.afdb.list('apps').push({
       position: app.position,
       title: app.title,
-      // appUrl: app.appUrl,
-      // description: app.description,
-      // imgUrl: app.imgUrl,
-      // gitHubUrl: app.gitHubUrl
+      appUrl: app.appUrl,
+      description: app.description,
+      imgUrl: app.imgUrl,
+      gitHubUrl: app.gitHubUrl
     });
   }
 
@@ -46,14 +83,14 @@ export class AppService {
       //id: app.id,
       position: app.position,
       title: app.title,
-      // appUrl: app.appUrl,
-      // description: app.description,
-      // imgUrl: app.imgUrl,
-      // gitHubUrl: app.gitHubUrl
+      appUrl: app.appUrl,
+      description: app.description,
+      imgUrl: app.imgUrl,
+      gitHubUrl: app.gitHubUrl
     });
   }
 
-  removeApp(app) {
+  deleteApp(app) {
     this.afdb.list('apps').remove(app.id);
   }
 }

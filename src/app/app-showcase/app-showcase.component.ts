@@ -5,6 +5,8 @@ import { Section } from "../model/section";
 
 import { AppService } from "../service/app.service";
 
+import { AppDataFetchingService } from "../service/app-data-fetching.service";
+
 
 @Component({
   selector: 'app-showcase',
@@ -21,17 +23,19 @@ export class AppShowcaseComponent implements OnInit {
   private appToEdit: App;
   //public appAdded = false;
 
-
-  constructor(public appService: AppService) {}
+  constructor(
+    private appService: AppService,
+    private appDataFetchingService: AppDataFetchingService
+  ) {}
 
   ngOnInit() {
     this.getApps();
   }
 
-  assembleSections(sections) {
+  assembleSections($sections: number[]) {
     this.sections = []; // Holds its value until reset here.
     let a: App[] = [];
-    sections.forEach(num => {
+    $sections.forEach(num => {
       this.apps.forEach(app => {
         if (app.position === num) a.push(app);
       });
@@ -43,31 +47,21 @@ export class AppShowcaseComponent implements OnInit {
     });
   }
 
-  // positionShift(newPosition: number) {
-  //   this.apps.forEach(app => {
-  //     if (app.position >= newPosition) {
-  //       app.position += 1;
-  //       this.updateBoogerApp(app);
-  //     }
-  //   });
-  // }
-
-  // updateBoogerApp(app) {
-    
-  //   this.appService.updateApp(app);
-  // }
-
-  
   getApps() {
-    this.appService.getApps().subscribe(serviceApps => {
-      this.apps = serviceApps;
-      
-      this.appService.getKeys().subscribe(serviceKeys => {
-        this.keys = serviceKeys;
-        for (let i = 0; i < this.apps.length; i++) {
-          this.apps[i].id = this.keys[i].key;
-        }
-      })
-    });
+    this.appDataFetchingService.subject.subscribe({
+      next: x => this.apps = x
+    }); 
   }
+
+  // getApps() {
+  //   this.appService.getApps().subscribe(serviceApps => {
+  //     this.apps = serviceApps;
+  //     this.appService.getKeys().subscribe(serviceKeys => {
+  //       this.keys = serviceKeys;
+  //       for (let i = 0; i < this.apps.length; i++) {
+  //         this.apps[i].id = this.keys[i].key;
+  //       }
+  //     })
+  //   })
+  // }
 }

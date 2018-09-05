@@ -31,3 +31,10 @@
 	background-color: rgba(255, 255, 255, 0.863);
 	color: rgb(129, 128, 128);
 }
+.gitHubLink {
+  float: right;
+}
+.gitHubIcon:hover {
+  opacity: 0.863;
+  filter: alpha(opacity=86); /* For IE8 and earlier */
+}

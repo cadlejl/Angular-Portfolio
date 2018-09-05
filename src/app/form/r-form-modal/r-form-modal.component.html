@@ -26,6 +26,8 @@
   aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+
+      
       <form 
         [formGroup]="appForm"
         (ngSubmit)="submitForm()"><!-- (td) #appForm="ngForm" -->
@@ -55,12 +57,12 @@
             <div class="col-6">
                 <div class="form-group">
                   <label for="appUrl" class="sr-only">App URL</label>
-                  <!-- <input 
+                  <input 
                     type="text" 
                     class="form-control" 
                     required
                     formControlName="appUrl"
-                    placeholder="App URL"> -->
+                    placeholder="App URL">
                   <!-- <div 
                     [hidden]="appUrl.valid || appUrl.pristine"
                     class="alert alert-danger">
@@ -75,7 +77,7 @@
           <div class="row">
 
             <div id="sectionRadio" class="col-6">
-              <div class="form-group">
+              <div *ngIf="!editing" class="form-group">
                 <label for="newSection" class="newSection mr-3">New Section?</label>
                 
                 
@@ -92,7 +94,7 @@
                 <mat-radio-group 
                   required
                   [(ngModel)]="newSection" 
-                  (change)="newSectionChange(newSection)"
+                  (change)="newSectionChange()"
                   [ngModelOptions]="{standalone: true}"><!--[(ngModel)]="newSection"--> 
                   <!--[(ngModel)]="yourCrust"  class="radio_Group"
                     (change)="sizeCrustChange($event)"-->
@@ -113,11 +115,11 @@
             <div class="col-6">
                 <div class="form-group">
                   <label for="imgUrl" class="sr-only">Image URL</label>
-                  <!-- <input 
+                  <input 
                     type="text" 
                     class="form-control" 
                     formControlName="imgUrl"
-                    placeholder="Image URL"> -->
+                    placeholder="Image URL">
                     <!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"
@@ -132,7 +134,7 @@
             <div class="row">
 
               <div id="positionLabel" class="col-4">
-                <div class="form-group">
+                <div *ngIf="!editing" class="form-group">
                   <label for="position" class="placement mr-2">Display Position</label>
                   
                   <select 
@@ -155,11 +157,11 @@
               <div class="col-6 offset-2">
                 <div class="form-group">
                   <label for="gitHubUrl" class="sr-only">GitHub URL</label>
-                  <!-- <input 
+                  <input 
                     type="text" 
                     class="form-control" 
                     formControlName="gitHubUrl"
-                    placeholder="GitHub URL"> -->
+                    placeholder="GitHub URL">
                     <!--required-->
                   <!-- <div 
                     [hidden]="imgUrl.valid || imgUrl.pristine"

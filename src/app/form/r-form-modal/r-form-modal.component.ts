@@ -1,22 +1,20 @@
-import { Component, Output, EventEmitter, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
+import { 
+  Component, Output, EventEmitter, OnInit, Input, OnChanges, ViewChild 
+} from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
-import { AppService } from "../../service/app.service";
-import { PositionsSettingService } from "../form-services/positions-setting.service";
-import { SectionChangeService } from "../form-services/section-change.service";
-import { FormConfigurationService } from "../form-services/form-configuration.service";
-import { FormSubmissionService } from "../form-services/form-submission.service";
-import { AppDataFetchingService } from "../form-services/app-data-fetching.service";
-// import { AppAddingService } from "../form-services/app-adding.service";
-// import { AppUpdatingService } from "../form-services/app-updating.service";
-// import { AppRemovingService } from "../form-services/app-removing.service";
-// import { PositionChangingService } from "../form-services/position-changing.service";
-// import { PositionShiftingService } from "../form-services/position-shifting.service";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { App } from "../../model/app";
 
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { AppService } from "../../service/app.service";
+
+import { PositionsSettingService } from "../form-services/services/positions-setting.service";
+import { SectionChangeService } from "../form-services/services/section-change.service";
+import { FormConfigurationService } from "../form-services/services/form-configuration.service";
+import { FormSubmissionService } from "../form-services/services/form-submission.service";
+import { PositionShiftingService } from "../form-services/services/position-shifting.service";
 
 @Component({
   selector: 'r-form-modal',
@@ -25,9 +23,10 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 })
 export class RFormModalComponent implements OnInit, OnChanges { 
   @Input() appToEdit: App;
-  @Output() numberOfSections = new EventEmitter<number[]>(); 
+  @Output() sectionNumbers = new EventEmitter<number[]>(); 
   @Output() wasEdited = new EventEmitter<App>();
   @ViewChild('staticModal') staticModal: ModalDirective;
+
   private newSection: boolean = true;
   private positions: number[];
   private appForm: FormGroup = null;
@@ -37,6 +36,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
   private apps: App[];
   private keys;
   private positionChanged = false;
+  private noPositionChange = false;
+  private editing = false;
 
   constructor(
     private formB: FormBuilder, 
@@ -45,41 +46,73 @@ export class RFormModalComponent implements OnInit, OnChanges {
     private sectionChangeService: SectionChangeService,
     private formConfigurationService: FormConfigurationService,
     private formSubmissionService: FormSubmissionService,
-    private appDataFetchingService: AppDataFetchingService
-    // private appAddingService: AppAddingService,
-    // private appUpdatingService: AppUpdatingService,
-    // private appRemovingService: AppRemovingService,
-    // private positionChangingService: PositionChangingService,
-    // private positionShiftingService: PositionShiftingService
-  ) { }
+    private positionShiftingService: PositionShiftingService
+  ) {  }
 
+
+  ///*** EDITING ***///
   ngOnInit() {
+    // Not sure of the status of these two commented lines.
     //this.apps = this.appDataFetchingService.getApps();
     //this.positions = this.positionsSettingService.positions(this.apps);
-
     this.getApps();
-    console.log("oninit");
     this.configureForm();
   }
 
-  //*** EDIT: This should work for now as long as editing is all I'm using OnChanges for.
+  //*** EDIT: This should work for now as long as editing is all OnChanges is used for.
+  // If appToEdit is initialized ...
   ngOnChanges() {
+    console.log(this.editing);
+    this.editing = true;
     this.configureForm();
-    if (this.appToEdit) this.isModalShown = true;
+    /* Conditional is necessary because some variables aren't initialized on when onChanges() is first read on component initialization, and because isModalShown will be set to true. This is confusing because I thought onChanges would only run when @Input received a value */
+    if (this.appToEdit) {
+      // Hold the length
+      const p = this.positions.length;
+      // Check the number of apps in editApp.position and pop extra position if a shift will occur (if only 1 app in position).
+      this.positions = this.sectionChangeService.editing(
+        this.apps, 
+        this.positions, 
+        this.appToEdit.position
+      );
+      // If a position was popped, disallow newSectionChange to add or remove positions.
+      if (p > this.positions.length) this.noPositionChange = true;
+      // Causes modal to show.
+      this.isModalShown = true;
+    }
   }
+  ///*** END EDITING ***///
+
+  /* Called in template: newSection models radio-button values. Then a position is popped if true or pushed if false, on positions. */
+  /* If editing an app in a section with no other app in it, positions had the extra popped off onChanges(), noPositionChange = false, and this code will not run, because the last section will be shifted down one place. */
+  newSectionChange() {
+    // If editing from a position 
+    if (!this.noPositionChange) {
+      // Add or remove extra position.
+      this.positions = this.sectionChangeService.newSectionChange(this.newSection, this.positions);
+    }
+  }
+
+
+
+  ///*** Populating the apps array and setting the positions array ***///
+  // getApps() {
+  //   this.appDataFetchingService.subject.subscribe({
+  //     next: x => this.apps = x
+  //   }); 
+  // }
 
   getApps() {
-    // console.log("getApps");
+    // Maybe this work should be done in the service and return just the apps array in a new observable.
     this.appService.getApps().subscribe(serviceApps => {
       this.apps = serviceApps;
+      // AngularFire 2 not returning data with keys. Keys are mapped out in service and added in here.
       this.appService.getKeys().subscribe(serviceKeys => {
         this.keys = serviceKeys;
         for (let i = 0; i < this.apps.length; i++) {
           this.apps[i].id = this.keys[i].key;
         }
       })
-      // console.log("Before you are here");
-      // console.log('You are here! setPositions() should happen next!');
       this.setPositions();
     })
   }
@@ -88,12 +121,14 @@ export class RFormModalComponent implements OnInit, OnChanges {
     // Audit apps for their positions
     let pos = this.positionsSettingService.setPositions(this.apps);
     // Tell showcase how many sections it needs
-    this.numberOfSections.emit(pos);
+    this.sectionNumbers.emit(pos);
     // Assure the form has at least 1 position available
     if (this.apps.length > 0) pos.push(pos.length + 1);
     // Set positions for newSectionChange()
     this.positions = pos;
   }
+  ///*** END Populating the apps array and setting the positions array ***///
+
 
   // Optional parameter from app-details
   configureForm() {
@@ -107,31 +142,70 @@ export class RFormModalComponent implements OnInit, OnChanges {
   }
 
   submitForm(deleteClick?: boolean) {
-    this.currentApp = this.formSubmissionService.receiveFormValues(this.currentApp, this.appForm);
-    this.formSubmissionService.submitForm(
-      this.apps,
-      this.currentApp,
-      this.positionChanged,
-      this.newSection,
-      deleteClick
+    // MARKED FOR DELETION
+    // I suspect currentApp is not needed beyond this point. Thinking I could just send everything to the service and let it take over.
+    // this.currentApp = this.formSubmissionService.receiveFormValues(
+    //   this.currentApp, this.appForm
+    // );
+
+    // this.formSubmissionService.submitForm(
+    //   this.apps,
+    //   this.currentApp,
+    //   this.positionChanged,
+    //   this.newSection,
+    //   deleteClick
+    // );
+    // END MARKED FOR DELETION
+
+    // This new code sends all the info at once and lets the service take over.
+    this.formSubmissionService.formSubmission(
+      this.appForm, this.apps, this.currentApp,
+      this.positionChanged, this.newSection, deleteClick
     );
+
+    // It seems like this should be called before calling fSService, but I think it somehow clears the form too soon or something like that, which may be why I put it here.
+    this.freshCaller();
   }
 
-  newSectionChange(newSection: boolean) {
-    this.positions = this.sectionChangeService.newSectionChange(newSection, this.positions);
-  }
 
+  ///*** REFRESH FORM: 3 methods; last set ***///
   freshForm() {
-    this.appForm.reset();
+    this.editing = false;
+    this.setPositions();
+    this.noPositionChange = false;
     this.newSection = true;
-    this.cleanApp();
+    this.freshApp();
+    this.appForm.reset();
+    // this.appToEdit = undefined;
   }
-
-  cleanApp() {
+  
+  freshApp() {
     this.currentApp = new App(null, null, null/*, null, null, null, null*/);
     if (this.appToEdit){
-      this.appToEdit = new App(null, null, null/*, null, null, null, null*/);
+      this.appToEdit = undefined;//new App(null, null, null/*, null, null, null, null*/);
       this.wasEdited.emit(this.appToEdit);
     }
   }
+
+  // In order to call freshForm() after updating. As of this writing, position-shifting.service contains the only calls to appUpdating.service. Updates occur in iteration, so the observable is returned at the end of positionShift().
+  freshCaller() {
+    /* Subscriber derived from http://reactivex.io/rxjs/manual/overview.html#observable */
+    // console.log('just before subscribe');
+    // this.positionShiftingService.observable.subscribe({
+    //   // next: x => console.log('got value ' + x),
+    //   // error: err => console.error('something wrong occurred: ' + err),
+    //   complete: () => this.freshForm() //console.log('done'),
+    // });
+    // console.log('just after subscribe');
+
+    this.formSubmissionService.observable.subscribe({
+      complete: () => this.freshForm()
+    });
+
+    this.positionShiftingService.observable.subscribe({
+      complete: () => this.freshForm()
+    });
+  }
+  ///*** END REFRESH FORM ***///
+
 }
