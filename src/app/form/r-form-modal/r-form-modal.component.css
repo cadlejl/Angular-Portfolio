@@ -42,7 +42,7 @@ textarea {
 	line-height: 40px;
 	background-color: #fff;
 	border-radius: 48px;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
 	box-sizing: border-box;
 	cursor: pointer;
 	color: #1976d2;

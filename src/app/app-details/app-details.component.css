@@ -18,11 +18,11 @@
 	line-height: 28px;
 	background-color: #fff;
 	border-radius: 48px;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
 	box-sizing: border-box;
 	cursor: pointer;
 	color: #1976d2;
-	font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 	letter-spacing: .3px;
 	text-transform: uppercase;
 	margin: .3rem;
@@ -31,10 +31,10 @@
 	background-color: rgba(255, 255, 255, 0.863);
 	color: rgb(129, 128, 128);
 }
-/* .gitHubLink {
-  float: right;
-} */
 .gitHubIcon:hover {
   opacity: 0.863;
   filter: alpha(opacity=86); /* For IE8 and earlier */
+}
+.appImg {
+  box-shadow: 0 3px 7px 0 rgba(0,0,0,.50);
 }
