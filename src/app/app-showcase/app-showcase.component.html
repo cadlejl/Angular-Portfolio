@@ -1,33 +1,26 @@
+
 <div class="row  text-center">
 
-    <div class="col-6">
-      <h1>Applications</h1>
-    </div>
-
-    <div class="col-6">
-      <!-- <button 
-        type="button"
-        class="btn btn-success btn-lg"
-        (click)="showChildModal()"> -->
-        <!--(click)="staticModal.show()"-->
-        <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
-        <!-- Add App
-      </button> -->
-      <!-- <td-form-modal></td-form-modal> -->
-
-      <r-form-modal 
-        (sectionNumbers)="assembleSections($event)"
-        [appToEdit]="appToEdit"
-        (wasEdited)="appToEdit = $event">
-      </r-form-modal>
-    </div>
-
+  <div class="col-md py-3">
+    <h1>Applications</h1>
   </div>
 
-<!-- <div *ngIf="apps"> -->
-  <app-section
-    *ngFor="let section of sections"
-    (appToEdit)="appToEdit = $event"
-    [section]="section">
-  </app-section><!--*ngFor="let section of sections"  (showcaseSections)="sections = $event"-->
-<!-- </div> -->
+  <div class="col-md py-3">
+    <r-form-modal 
+      (sectionNumbers)="assembleSections($event)"
+      [appToEdit]="appToEdit"
+      (wasEdited)="appToEdit = $event">
+    </r-form-modal>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md">
+    <app-section
+      *ngFor="let section of sections"
+      (appToEdit)="appToEdit = $event"
+      [section]="section">
+    </app-section>
+  </div>
+</div>

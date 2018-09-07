@@ -48,7 +48,6 @@ export class AppService {
       imgUrl: app.imgUrl,
       gitHubUrl: app.gitHubUrl
     });
-    console.log(app, 'appService')
     return newAppId;
     
     // 2. this.subject.next(newAppId);
@@ -79,6 +78,7 @@ export class AppService {
   }
 
   updateApp(app: App) {
+    // console.log(app, 'updateApp');
     this.afdb.object('apps/' + app.id).update({
       //id: app.id,
       position: app.position,

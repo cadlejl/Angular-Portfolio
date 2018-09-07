@@ -62,7 +62,6 @@ export class RFormModalComponent implements OnInit, OnChanges {
   //*** EDIT: This should work for now as long as editing is all OnChanges is used for.
   // If appToEdit is initialized ...
   ngOnChanges() {
-    console.log(this.editing);
     this.editing = true;
     this.configureForm();
     /* Conditional is necessary because some variables aren't initialized on when onChanges() is first read on component initialization, and because isModalShown will be set to true. This is confusing because I thought onChanges would only run when @Input received a value */
@@ -157,6 +156,12 @@ export class RFormModalComponent implements OnInit, OnChanges {
     // );
     // END MARKED FOR DELETION
 
+
+    /* WPC (without position changing) */
+    /* 1st attempt to fix crazy bug */
+    if (this.editing) this.newSection = false;
+
+
     // This new code sends all the info at once and lets the service take over.
     this.formSubmissionService.formSubmission(
       this.appForm, this.apps, this.currentApp,
@@ -170,6 +175,9 @@ export class RFormModalComponent implements OnInit, OnChanges {
 
   ///*** REFRESH FORM: 3 methods; last set ***///
   freshForm() {
+    // With positon select conditioned on not editing, I notice positionChange is true while editing an app that was just added. So I reset it here. 
+    this.positionChanged = false;
+
     this.editing = false;
     this.setPositions();
     this.noPositionChange = false;

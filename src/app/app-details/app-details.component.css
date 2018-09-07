@@ -15,7 +15,7 @@
 	padding: 0 12px;
 	font-size: 14px;
 	font-weight: 700;
-	line-height: 30px;
+	line-height: 28px;
 	background-color: #fff;
 	border-radius: 48px;
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
@@ -31,9 +31,9 @@
 	background-color: rgba(255, 255, 255, 0.863);
 	color: rgb(129, 128, 128);
 }
-.gitHubLink {
+/* .gitHubLink {
   float: right;
-}
+} */
 .gitHubIcon:hover {
   opacity: 0.863;
   filter: alpha(opacity=86); /* For IE8 and earlier */

@@ -8,7 +8,6 @@ import { FormServicesModule } from '../form-services.module';
 @Injectable({ providedIn: FormServicesModule })
 export class FormConfigurationService {
   private currentApp: App;
-  constructor() { }
 
   // Modeled after bugged-out-rebuild.bug-detail.component
   configureCurrentApp(editApp: App) {

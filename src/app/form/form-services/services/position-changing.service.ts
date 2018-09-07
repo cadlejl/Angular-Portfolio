@@ -64,17 +64,12 @@ export class PositionChangingService {
 
     // Add editApp as a new app with no id. currentApp loses it's id here as well.
     this.editApp.id = undefined; // THIS IS CHANGING currentApp.id, but then it get's reset to currentAppId below ... so... ok? I guess? It doesn't seem like the right way. But I will leave it for now. 
-    console.log(
-      this.editApp.id, currentAppId, this.currentApp.id, 
-      "If editApp = currentApp, what happens to currentApp.id if editApp.id is changed?"
-    );
 
     // Receive the new app's id back from adding.
     const newAppId = this.addAppWithId();
 
     // Both variables point to the same place in memory so currentApp wants it's id back.
     this.currentApp.id = currentAppId;// Logged: currentApp had id here. But now editApp has an id again. Need to find out is this is a problem. CHECKED: I checked all places editApp is used and it all seems safe as things currently stand.
-    console.log(newAppId);
     this.removeApp(newAppId);
   }
 
@@ -97,7 +92,7 @@ export class PositionChangingService {
     // Thinking this should just be a temporary check until I'm sure everything is working.
     if (this.editApp.id) throw console.error('editApp.id should be undefined.');
     
-    this.positionShift(this.editApp.position);
+    this.positionShift(this.editApp.position/*Hit this when adding a new app. Worried it doesn't make semantic sense. Maybe I should consider accounting for cases in which this is needed and cased in which it is not. */);
     this.addAppWithoutId();
   }
 

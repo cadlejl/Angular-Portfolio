@@ -24,12 +24,10 @@ export class AppDataFetchingService {
   // })
 
   constructor(private appService: AppService) { 
-    //console.log(this.subject, 'constructor');
     this.getApps();
   }
 
   getApps() {
-    //console.log(this.subject, 'before subscribe');
     this.appService.getApps().subscribe(serviceApps => {
       this.apps = serviceApps;
       this.appService.getKeys().subscribe(serviceKeys => {
@@ -38,9 +36,7 @@ export class AppDataFetchingService {
           this.apps[i].id = keys[i].key;
         }
       })
-      //console.log(this.apps, 'before subject');
       this.subject.next(this.apps);
-      //console.log(this.apps, 'after subject');
     })
   }
 }

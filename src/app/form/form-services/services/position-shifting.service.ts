@@ -53,7 +53,7 @@ export class PositionShiftingService implements OnInit{
   movingToPositon?: number, 
   deleting?: boolean
 ) {
-    const cn = createNewPosition;
+    const cn = createNewPosition;  // Interesting we don't have this when adding a new app to a position that does not yet exist.
     const mf = movingFromPosition;
     const mt = movingToPositon;
     const d = deleting;
@@ -75,7 +75,7 @@ export class PositionShiftingService implements OnInit{
     }
     // From PCS positionShift() 
     else if (mt && (!cn && !mf && !d)) {
-      if (p >= cn) operator = "+";
+      if (p >= mt) operator = "+";
     }
     // From ARS delete() & orderPositionShifted()
     else if ((mf && d) && (!cn && !mt)) {
@@ -83,7 +83,7 @@ export class PositionShiftingService implements OnInit{
     }
     else throw console.error('Unhandled scenario in PositionShiftingService');
 
-    this.adjustPosition(operator, app, p);
+    if (operator) this.adjustPosition(operator, app, p);
   }
 
   adjustPosition(operator: string, app: App, p: number) {

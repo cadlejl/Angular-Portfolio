@@ -58,7 +58,6 @@ export class AppRemovingService {
   I should determine if the position parameter is really necessary. */
   movingOut(newAppId: string) {
     this.currentApp.id = newAppId;
-    console.log(newAppId, 'new app id');
     /* Moving app is held in PositionChangingService (UPDATE: called by initiateAppRemoval() above). Delete original app from its old position. 
     Actually, just to be exact, now the moving app was moved before this method is called. */
     this.appService.deleteApp(this.app);
@@ -74,7 +73,8 @@ export class AppRemovingService {
   // Initiated in PCS addToExistingSection loop.
   // Determine whether or not app was just deleted from a position with other apps in it.
   isShiftRequired(app: App/*2 different variables access*/) {
-    let movingFromPosition;
+    let movingFromPosition: number;
+    let appToRemove: App;
     this.appsInThisPosition = 0;
     // It's ok here that apps still has deleted app in it because 
     this.apps.forEach(a => {
@@ -84,10 +84,12 @@ export class AppRemovingService {
         // If shift is required, app must be moved from array so shift can occur.
         if (a.id === app.id) {
           movingFromPosition = a.position;
-          this.removeAppFromArray(a); // return;?
+          appToRemove = a;
         }
       }
     });
+    if (appToRemove) this.removeAppFromArray(appToRemove) 
+    else  console.error("Unhandled condition in AppRemovingService isShiftRequired()");
 
     // If no other app is in the position, shift positions down so there's no gap.
     if (this.appsInThisPosition < 2) this.orderPositionsShifted(
@@ -102,7 +104,6 @@ export class AppRemovingService {
 
   orderPositionsShifted(movingFromPosition: number, currentApp?: App) {
     if (!this.deleteClick) this.apps.push(this.currentApp);
-    console.log(this.currentApp, 'orderPositionShifted() currentApp with new id');
     // movingOut() pass old position
     this.positionShiftingService.positionShift(this.apps, null, movingFromPosition, null, true);
   }
