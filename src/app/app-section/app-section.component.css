@@ -1,6 +1,6 @@
 hr {
-  /* width: 120%; */
-  margin: 0 -15%;
+  width: 100%;
+  margin: 0 auto;
   border: none;
   background: rgb(162, 181, 202);
   height: 1px;
@@ -15,8 +15,6 @@ hr {
   /* border-style: inset; */
   /* border-width: 1px; */
 }
-
-
 .details {
   margin: 32px auto;
 }

@@ -12,7 +12,7 @@ export class SectionChangeService {
     return positions;
   }
 
-  /* Called by RFormModal.ngOnChanges(): If editPosition has only one app in it, there should not be an extra position available in the positions array, as to move the app to the last position would shift that position's current occupants down 1 place. */
+  /* Called by RFormModal.ngOnChanges(): If editPosition has only one app in it, there should not be an extra position available in the positions array, as to move the app to the last position would shift that position's current occupants down 1 place, since you're leaving a hole where the app came from. */
   editing(apps: App[], positions: number[], editPosition: number) {
     let pos = 0;
     apps.forEach(app => {

@@ -21,7 +21,9 @@ export class AppRemovingService {
   ) { }
 
   // Called by:
-  //  FormSubmissionService.confirmAndDelete() in a loop
+  // 1. FormSubmissionService.confirmAndDelete() in a loop.
+  // 2. PositionChangingService.removeApp() (path bging checked). newAppId not used.
+  // 3. PCS.addToExistingSection() sends in the newAppId.
   initiateAppRemoval(
     apps: App[], currentApp: App, app?: App, appPosition?:number, 
     currentAppPosition?: number/*no position change*/, deleteClick?: boolean, newAppId?: string
@@ -34,7 +36,7 @@ export class AppRemovingService {
     this.deleteClick = deleteClick;
 
 
-    this.deleteClick ? this.delete() : this.movingOut(newAppId);
+    this.deleteClick ? this.delete() : this.movingOut(newAppId/*number 2 called by doesn't use*/);
   }
 
   ///*** For Deleting Only: 1 method ***///
@@ -54,12 +56,14 @@ export class AppRemovingService {
   ///*** For Moving App to Another Position: 4 methods ***///
   private appsInThisPosition: number;
 
-  /* Called by PositionChangingService to remove an app from it's current section after it was copied and placed in another section. 
+  /* NOTE. NEED TO DISCOVER WHEN THIS IS TRUE: Called by PositionChangingService to remove an app from it's current section after it was copied and placed in another section. 
+  IN CALLED BY PATH 2, REMOVAL HAPPENS FIRST. THEN AN EDITED APP IS ADDED LATER.
   I should determine if the position parameter is really necessary. */
-  movingOut(newAppId: string) {
+  movingOut(newAppId: string/*number 2 called-by doesn't use*/) {
+    // Not sure what this is for
     this.currentApp.id = newAppId;
     /* Moving app is held in PositionChangingService (UPDATE: called by initiateAppRemoval() above). Delete original app from its old position. 
-    Actually, just to be exact, now the moving app was moved before this method is called. */
+    NEED TO NOTATE WHEN THIS IS TRUE. IN CALLED-BY PATH FROM ABOVE, IT ISN'T TRUE: Actually, just to be exact, now the moving app was moved before this method is called. */
     this.appService.deleteApp(this.app);
     // If no other app holds the position, a shift is required.
     this.isShiftRequired(this.app);
@@ -102,8 +106,13 @@ export class AppRemovingService {
     this.apps.splice(this.apps.indexOf(a), 1);
   }
 
+  /* In PCS addToExistingSeciton() sends the new id after app was added, which gets passed into currentApp.id in movingOut() above, which is why the push is required, because it's an add first, shift later path (apparently) */
   orderPositionsShifted(movingFromPosition: number, currentApp?: App) {
-    if (!this.deleteClick) this.apps.push(this.currentApp);
+    if (
+      !this.deleteClick 
+      && /*this added to fix bug on ordered-by path 2*/currentApp.id
+      ) this.apps.push(this.currentApp);
+
     // movingOut() pass old position
     this.positionShiftingService.positionShift(this.apps, null, movingFromPosition, null, true);
   }

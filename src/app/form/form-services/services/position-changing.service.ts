@@ -19,7 +19,7 @@ export class PositionChangingService {
   // Initialized from the form with new properties.
   private currentApp: App;
 
-  private editApp: App;
+  private editingOrNewApp: App;
   private position: number;
   //private editedApp: App;
 
@@ -43,7 +43,7 @@ export class PositionChangingService {
     this.apps = apps;
     this.currentApp = currentApp;
     // These two will point to the same place in memory.
-    this.editApp = currentApp;
+    this.editingOrNewApp = currentApp;
     this.position = currentApp.position;
 
     // newSection Accoutning Path 1: Beyond this condition I need to account for multiple scenarios.
@@ -63,7 +63,7 @@ export class PositionChangingService {
     let currentAppId = this.currentApp.id;
 
     // Add editApp as a new app with no id. currentApp loses it's id here as well.
-    this.editApp.id = undefined; // THIS IS CHANGING currentApp.id, but then it get's reset to currentAppId below ... so... ok? I guess? It doesn't seem like the right way. But I will leave it for now. 
+    this.editingOrNewApp.id = undefined; // THIS IS CHANGING currentApp.id, but then it get's reset to currentAppId below ... so... ok? I guess? It doesn't seem like the right way. But I will leave it for now. 
 
     // Receive the new app's id back from adding.
     const newAppId = this.addAppWithId();
@@ -90,9 +90,9 @@ export class PositionChangingService {
 
   shiftThenAdd() {
     // Thinking this should just be a temporary check until I'm sure everything is working.
-    if (this.editApp.id) throw console.error('editApp.id should be undefined.');
+    if (this.editingOrNewApp.id) throw console.error('editApp.id should be undefined.');
     
-    this.positionShift(this.editApp.position/*Hit this when adding a new app. Worried it doesn't make semantic sense. Maybe I should consider accounting for cases in which this is needed and cased in which it is not. */);
+    this.positionShift(this.editingOrNewApp.position);
     this.addAppWithoutId();
   }
 
@@ -101,7 +101,7 @@ export class PositionChangingService {
     /* I am currently bypassing appAddingService for expediency, but perhaps I should change this later. */
     // New way: 
     // now setting it to pass the new id back to put into 
-    const newAppId = this.appService.addAppWithId(this.editApp);
+    const newAppId = this.appService.addAppWithId(this.editingOrNewApp);
     return newAppId;
 
     // I don't remember why this is here. Maybe need it, maybe not. I found it commented out.
@@ -110,10 +110,10 @@ export class PositionChangingService {
 
   addAppWithoutId() {
     // Old way
-    this.appAddingService.addApp(this.editApp);
+    this.appAddingService.addApp(this.editingOrNewApp);
   }
 
   positionShift(movingToPosition: number) {
-    this.positionShiftingService.positionShift(this.apps, null, null, movingToPosition /* Assuming at the moment this is correct as it is coming from editApp which was set = to currentApp, but I need to also make sure editApp isn't getting changed again before getting passed here: at first glance it doesn't appear to be. */);
+    this.positionShiftingService.positionShift(this.apps, null, null, movingToPosition);
   }
 }

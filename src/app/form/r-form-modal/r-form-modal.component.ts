@@ -159,7 +159,7 @@ export class RFormModalComponent implements OnInit, OnChanges {
 
     /* WPC (without position changing) */
     /* 1st attempt to fix crazy bug */
-    if (this.editing) this.newSection = false;
+    //if (this.editing) this.newSection = false;
 
 
     // This new code sends all the info at once and lets the service take over.
