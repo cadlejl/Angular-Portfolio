@@ -1,5 +1,19 @@
 .navbar {
-    height: 60px;
-    font-family: Raleway,sans-serif;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.26);
+  height: 60px;
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1PX;
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,.26);
+}
+#navbarSupportedContent a {
+  color: #4c5454;
+  padding: 17px;
+}
+#navbarSupportedContent a:hover {
+  color: #2e84c0;
+}
+#navbarSupportedContent[_ngcontent-c1] a[_ngcontent-c1].selected {
+  color: #2e84c0;
 }

@@ -89,9 +89,6 @@ export class PositionChangingService {
   }
 
   shiftThenAdd() {
-    // Thinking this should just be a temporary check until I'm sure everything is working.
-    if (this.editingOrNewApp.id) throw console.error('editApp.id should be undefined.');
-    
     this.positionShift(this.editingOrNewApp.position);
     this.addAppWithoutId();
   }
@@ -103,13 +100,9 @@ export class PositionChangingService {
     // now setting it to pass the new id back to put into 
     const newAppId = this.appService.addAppWithId(this.editingOrNewApp);
     return newAppId;
-
-    // I don't remember why this is here. Maybe need it, maybe not. I found it commented out.
-    //this.apps.push(this.editApp);
   }
 
   addAppWithoutId() {
-    // Old way
     this.appAddingService.addApp(this.editingOrNewApp);
   }
 

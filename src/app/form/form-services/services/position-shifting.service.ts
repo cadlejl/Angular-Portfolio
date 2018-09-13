@@ -46,14 +46,12 @@ export class PositionShiftingService implements OnInit{
 
   positionShift(
     apps: App[], 
-    /*DEBUG CONTEXT: DANGER: position passed in is not a previous position. It's the currentApp position which should be the new position.
-  UPDATE: i think I just fixed it. Well, I think it's passing in the old position now, but that didn't fix the app. */
-  createNewPosition?: number,
-  movingFromPosition?: number, 
-  movingToPositon?: number, 
-  deleting?: boolean
-) {
-    const cn = createNewPosition;  // Interesting we don't have this when adding a new app to a position that does not yet exist.
+    createNewPosition?: number, 
+    movingFromPosition?: number,
+    movingToPositon?: number, 
+    deleting?: boolean
+  ) {
+    const cn = createNewPosition;  // Interesting I don't have this when adding a new app to a position that does not yet exist.
     const mf = movingFromPosition;
     const mt = movingToPositon;
     const d = deleting;

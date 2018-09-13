@@ -2,7 +2,9 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 
-
+/* body {
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+} */
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
 	background-color: rgb(67, 148, 241);
 }

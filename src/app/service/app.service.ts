@@ -35,7 +35,7 @@ export class AppService {
   // public observableAppId = Observable.create(
   //   observer => { observer.next(this.newAppId)/*; observer.complete()*/ });
 
-    public subject = new BehaviorSubject(null);
+  //public subject = new BehaviorSubject(null);
 
   addAppWithId(app: App) {
     const newAppId = this.afdb.createPushId();

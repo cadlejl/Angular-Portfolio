@@ -57,12 +57,12 @@ textarea {
 }
 
 .buttons {
-    position: relative;
-    border: none;
+  position: relative;
+  border: none;
 	/* padding-bottom: 4rem; */
 	/* padding: 2rem 0; */
 	padding-top: 1.5rem;
-    justify-content: center;
+  justify-content: center;
 }
 
 .buttons .btn {

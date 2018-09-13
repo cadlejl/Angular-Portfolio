@@ -2,16 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { AppService } from "./app.service";
 
-
 import { App } from "../model/app";
 
-import { Observable, from, BehaviorSubject } from "rxjs";
-
-// I don't know how these got here.
-//import { PositionsSettingService } from "../form/form-services/services/positions-setting.service";
-// import { ButtonRadioGroupDirective } from 'ngx-bootstrap/buttons';
-// import { TabHeadingDirective } from 'ngx-bootstrap';
-
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
