@@ -27,7 +27,7 @@
             </div>
           </div>
 
-          <p class="my-2">{{ app.description }}</p>
+          <p class="my-2" [innerHTML]="app.description"></p>
 
           <div class="my-3">
             <a class="btn btn-primary" [href]="app.appUrl" target="_blank">Open</a>
@@ -64,7 +64,7 @@
             </div>
           </div>
 
-          <p class="my-2">{{ app.description }}</p>
+          <p class="my-2" [innerHTML]="app.description"></p>
 
           <div class="my-3">
             <a class="btn btn-primary" [href]="app.appUrl" target="_blank">Open</a>

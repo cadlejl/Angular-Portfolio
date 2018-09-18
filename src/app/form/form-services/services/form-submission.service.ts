@@ -29,6 +29,7 @@ export class FormSubmissionService {
   private positionChanged: boolean;
   private newSection: boolean;
   private deleteClick: boolean;
+  private textarea: string;
   public observable = Observable.create(observer => { observer.complete(); });
 
   formSubmission(
@@ -41,18 +42,45 @@ export class FormSubmissionService {
     this.positionChanged = positionChanged;
     this.newSection = newSection;
     this.deleteClick = deleteClick;
-    // Put form values into currentApp.
+    this.textarea = this.appForm.value["description"];
+    this.escapeVal();
     this.passFormValuesInto_currentApp();
     this.addEditDelete();
   }
 
+  escapeVal() { 
+    let tA = this.textarea;
+    let br = '<br>';
+    //textarea is reference to that object, replaceWith is string that will replace the encoded return
+    tA = escape(tA); //encode textarea string's carriage returns
+
+    for (let i = 0; i < tA.length; i++) { 
+      //loop through string, replacing carriage return encoding with HTML break tag
+      if (tA.indexOf("%0D%0A") > -1) { 
+        //Windows encodes returns as \r\n hex
+        tA = tA.replace("%0D%0A", br)
+      }
+      else if (tA.indexOf("%0A") > -1) { 
+        //Unix encodes returns as \n hex
+        tA = tA.replace("%0A", br)
+      }
+      else if (tA.indexOf("%0D") > -1) { 
+        //Macintosh encodes returns as \r hex
+        tA = tA.replace("%0D", br)
+      }
+    }
+    //unescape all other encoded characters
+    tA = unescape(tA);
+    this.textarea = tA;
+  }
 
   ///*** POPULATE CURRENTAPP FROM APPFORM (R-FORM-MODAL.COMPONENT) ***///
   passFormValuesInto_currentApp() {
     this.currentApp.position = +(this.appForm.value["position"]);
     this.currentApp.title = this.appForm.value["title"];
     this.currentApp.appUrl = this.appForm.value["appUrl"];
-    this.currentApp.description = this.appForm.value["description"];
+    // this.currentApp.description = this.appForm.value["description"];
+    this.currentApp.description = this.textarea;
     this.currentApp.imgUrl = this.appForm.value["imgUrl"];
     this.currentApp.gitHubUrl = this.appForm.value["gitHubUrl"];
   }
