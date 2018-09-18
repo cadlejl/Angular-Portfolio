@@ -25,9 +25,13 @@ export class AppDataFetchingService {
       this.apps = serviceApps;
       this.appService.getKeys().subscribe(serviceKeys => {
         let keys = serviceKeys;
-        for (let i = 0; i < this.apps.length; i++) {
+
+        this.apps.forEach((app, i) => {
           this.apps[i].id = keys[i].key;
-        }
+        });
+        // for (let i = 0; i < this.apps.length; i++) {
+        //   this.apps[i].id = keys[i].key;
+        // }
       })
       this.subject.next(this.apps);
     })

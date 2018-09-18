@@ -1,0 +1,81 @@
+h1 {
+  color: #fff;
+  font-weight: 600;
+}
+p {
+  color: #000;
+}
+.btn { /*should be reviewed for relevance. Probably should consolidate button styles later in styles.css*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 190px;
+	height: 40px;
+	padding: 0 24px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 40px;
+  background-color: #fff;
+	border-radius: 48px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
+	box-sizing: border-box;
+	cursor: pointer;
+  color: #1976D2;
+	font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	letter-spacing: .3px;
+	text-transform: uppercase;
+	margin: auto;
+}
+.btn:hover {
+	background-color: rgba(255, 255, 255, 0.863);
+	color: rgb(129, 128, 128);
+}
+.information-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 240px;
+  margin: 40px auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #51E5FF; /*#4F6272;*/
+  border-radius: 4px;
+  box-shadow: 0 3px 7px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  box-sizing: border-box;
+  transition: all .3s ease-in;
+}
+@media (min-width: 1200px) {
+  .information-bar {
+    min-width: 736px;
+  }
+}
+@media (min-width: 580px) {
+  .information-bar{
+    max-width: 50vw;
+  }
+}
+@media (min-width: 320px) {
+  .information-bar{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+@media (max-width: 320px) {
+  .information-bar{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (max-width: 320px) {
+  .docBtnDiv {
+    padding: 6px !important;
+  }
+}
+.docBtn {
+  width: 228px;
+}
+.docRow {
+  width: 100%;
+}

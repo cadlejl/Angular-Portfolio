@@ -1,0 +1,141 @@
+<div class="row  text-center">
+  <div class="col-md py-3">
+    <h1>Angular Application Development</h1>
+  </div>
+</div>
+
+
+
+
+<!-- <div class="row  text-center">
+    <div class="col-md py-3"> -->
+<div class="information-bar text-center">
+  <div class="row docRow">
+    <div class="col-xl-3">
+      <img src="/assets/Angular_full_color_logo.svg.png" width="100px" alt="">
+    </div>
+    <div class="col-xl-5 align-self-center">
+      <p class="my-3">Read about this application and my purposes for building it</p>
+    </div>
+    <div class="col-xl-4 align-self-center">
+      <button 
+        type="button" 
+        class="btn btn-primary" 
+        (click)="infoParentModal.show()">
+        Information
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="information-bar text-center">
+  <div class="row docRow">
+    <div class="col-xl-3">
+      <img src="/assets/Angular_full_color_logo.svg.png" width="100px" alt="">
+    </div>
+    <div class="col-xl-5 align-self-center">
+      <p>Please read the documentation to learn how this application works.</p>
+    </div>
+    <div class="col-xl-4 align-self-center docBtnDiv">
+      <button 
+        type="button" 
+        class="btn btn-primary docBtn" 
+        (click)="docsParentModal.show()">
+        Documentation
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" bsModal #infoParentModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-nested-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-nested-name1" class="modal-title pull-left">App Info</h4>
+        <button 
+          type="button" 
+          class="close pull-right" 
+          aria-label="Close" 
+          (click)="infoParentModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>This application</p>
+        <!-- <button type="button" class="btn btn-primary" (click)="infoChildModal.show()">Open second modal</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- <div class="modal fade" bsModal #infoChildModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-nested-name2">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-nested-name2" class="modal-title pull-left">Second modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="infoChildModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This is second modal <br>
+        < <button type="button" class="btn btn-primary" (click)="thirdModal.show()">Open third modal</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+ 
+
+
+
+
+
+<div 
+  class="modal fade" 
+  bsModal #docsParentModal="bs-modal" 
+  tabindex="-1" role="dialog" 
+  aria-labelledby="dialog-nested-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-nested-name1" class="modal-title pull-left">App Documentation</h4>
+        <p>{{ documentation }}</p>
+        <button 
+          type="button" 
+          class="close pull-right" 
+          aria-label="Close" 
+          (click)="docsParentModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>App sections (demarcated by horizontal rule) are a class in the application, with a number and an app array as properties.</p>
+        <!-- <button type="button" class="btn btn-primary" (click)="docsChildModal.show()">Edit</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+   
+  <!-- <div class="modal fade" bsModal #docsChildModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-nested-name2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-nested-name2" class="modal-title pull-left">Edit Documentation</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="docsChildModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <button type="button" class="btn btn-primary" (click)="thirdModal.show()">Open third modal</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

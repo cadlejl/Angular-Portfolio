@@ -22,6 +22,10 @@ export class AppService {
 			);
   }
 
+  getDocs() {
+    return 
+  }
+
   // EXPERIMENTAL: PositionShiftingService.positionShift() needs the new app just added in order to add it to the apps array so it can be shifted with the others.
   getNewAppId() {
     const newAppId = this.afdb.createPushId();

@@ -24,8 +24,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppShowcaseComponent } from './app-showcase/app-showcase.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { AppSectionComponent } from './app-section/app-section.component';
+import { IntroComponent } from './intro/intro.component';
 
-
+import { ModalModule/*, ButtonsModule*/ } from "ngx-bootstrap";
 
 
 // import { RFormModalComponent } from "./form/r-form-modal/r-form-modal.component";
@@ -37,6 +38,7 @@ import { AppSectionComponent } from './app-section/app-section.component';
     AppShowcaseComponent,
     AppDetailsComponent,
     AppSectionComponent,
+    IntroComponent,
 
 
     // RFormModalComponent
@@ -47,7 +49,7 @@ import { AppSectionComponent } from './app-section/app-section.component';
     //ReactiveFormsModule,
     //BrowserAnimationsModule, // This is imported in FormModule and probably doesn't need to be imported here
     // MatRadioModule,
-    //ModalModule.forRoot(),
+    ModalModule.forRoot(),
     //ButtonsModule.forRoot(),
     //BsDropdownModule.forRoot(),
     AngularFireDatabaseModule,

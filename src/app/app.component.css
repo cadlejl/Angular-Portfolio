@@ -3,6 +3,10 @@
   /* background-color: #fafafa; */
 	/* height: 900px; */
 }
+p {
+  line-height: 24px;
+  text-align: center;
+}
 /* .btn {
 	display: flex;
 	align-items: center;

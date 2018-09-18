@@ -5,7 +5,11 @@
   margin-top: 10px;
   text-transform: uppercase;
 }
-
+p {
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+}
 .btn { /*should be reviewed for relevance*/
 	/* display: flex; */
 	align-items: center;
