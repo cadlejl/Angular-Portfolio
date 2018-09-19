@@ -2,7 +2,10 @@ h1 {
   color: #fff;
   font-weight: 600;
 }
-p {
+/* h4, h5, li {
+  color: #000;
+} */
+.modal, .information-bar {
   color: #000;
 }
 .btn { /*should be reviewed for relevance. Probably should consolidate button styles later in styles.css*/
@@ -37,6 +40,7 @@ p {
   justify-content: space-around;
   align-items: center;
   min-width: 240px;
+  min-height: 136px;
   margin: 40px auto;
   padding-top: 16px;
   padding-bottom: 16px;

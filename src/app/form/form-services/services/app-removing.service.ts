@@ -35,7 +35,6 @@ export class AppRemovingService {
     this.currentAppPosition = currentAppPosition;
     this.deleteClick = deleteClick;
 
-
     this.deleteClick ? this.delete() : this.movingOut(newAppId/*number 2 called by doesn't use*/);
   }
 

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { AngularFireDatabase } from "angularfire2/database";
 
-import { Observable, BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { App } from "../model/app";
 
