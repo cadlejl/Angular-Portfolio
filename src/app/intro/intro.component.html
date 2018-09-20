@@ -47,6 +47,11 @@
 </div>
 
 
+<!-- <div class="text-center">
+  <p>This portfolio is also a developer reference tool</p>
+</div> -->
+
+
 <div class="modal fade" bsModal #infoParentModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-nested-name1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -68,7 +73,7 @@
         <p>This application is a portfolio and personal development reference tool. It's built with some styling inspiration from angular.io. As a portfolio, this app is also it's own most interesting feature because it's the most complex application that I've built from scratch without following a course for guidance, though some features and techniques from course apps are used.</p>
         <p>This app remains an important training tool, and is subject to further development. As a result the code remains loaded with commentary from the development process. You can see the code at <a href="https://github.com/cadlejl/Angular-Portfolio" target="_blank">GitHub</a>.</p>
         <h5>Technology</h5>
-        <p>This app is built in Angular 6. Other features of the app include Firebase Realtime Database and AngularFire2, Bootstrap, a reactive form in an ngx-bootstrap modal for adding apps, and RxJS Observable and BehaviorSubject.</p>
+        <p>This app is built in Angular 6, using Firebase Realtime Database and AngularFire2 to retrieve the data and pass it into RxJS observables. Other features of the app include Bootstrap classes, a FormBuilder reactive form with Validators in an ngx-bootstrap modal for adding apps, and an RxJS BehaviorSubject.</p>
         <h5>Philosophy</h5>
         <p>In the spirit of effenciency and progress I have often taken the general approach of primarily making the code work, and secondarily making it better. There are likely several features of this app that I will like to improve upon as I discover new techniques. Similarly, all apps in this portfolio should be considered works in progress.</p>
         <!-- <button type="button" class="btn btn-primary" (click)="infoChildModal.show()">Open second modal</button> -->
@@ -97,8 +102,10 @@
 
 <div 
   class="modal fade" 
-  bsModal #docsParentModal="bs-modal" 
-  tabindex="-1" role="dialog" 
+  bsModal 
+  #docsParentModal="bs-modal" 
+  tabindex="-1" 
+  role="dialog" 
   aria-labelledby="dialog-nested-name1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -117,17 +124,15 @@
         <h5>App Showcase</h5>
         <p>The app showcase is made up of one or more sections, demarcated by horizontal rule, which may feature any number of apps. This arrangement is primarily for grouping together multiple versions of the same app.</p>
         <h5>Sections</h5>
-        <p>Sections are a class in this app with two properties:</p>
-        <ol>
-          <li>A section number</li>
-          <li>An array of apps</li>
-        </ol>
+        <p>Sections are a class in this app with two properties: a number and an array of apps.</p>
         <h5>Featured Apps</h5>
         <p>Apps are a class in this app with several properties valued by form entries in the modal which is opened by clicking the "Add App" button. These values then populate the section in the selected position.</p>
         <h5>The Position Property</h5>
         <p>A fairly complex feature of this app relates to the featured apps' "position" property and several services in this app are dedicated to managing it. The app is designed for flexibility in app positioning, such that an app can be added to any section, either with other apps already in it, or creating a new section and shifting other apps out of the way with their positions being updated in the database. Likewise, any app can be edited to move from one positon, with or without other apps in it, to another position, with or without other apps in it, with each different scenario adding a layer of complexity to the attendant position shifting that will occur to the apps' position properties.</p>
         <h5>The "Positions" Dropdown</h5>
-        <p>The "Positions" available in the modal dropdown are read from the positions of apps retrieved from the database, with one extra added or removed depending on whether or not a new section is requested. When editing to move an app from a section with no other apps in it, an extra position is not added to the dropdown since the move will leave a hole causing all apps down the line to be shifted down one position to fill it.</p>
+        <p>The "Positions" available in the modal dropdown are read from the positions of apps retrieved from the database, with one extra added or removed depending on whether or not a new section is requested. When editing to move an app from a section with no other apps in it, an extra position is not added to the dropdown since the move will leave a hole causing all apps down the line to be shifted up one position to fill it.</p>
+        <h5>App Description &#60;br&#62; Tag</h5>
+        <p>Carriage returns entered into the "App Description" &#60;textarea&#62; are replaced with &#60;br&#62; tags. The data is then bound to the innerHTML property of the &#60;p&#62; tag.</p>
         <!-- <button type="button" class="btn btn-primary" (click)="docsChildModal.show()">Edit</button> -->
       </div>
     </div>

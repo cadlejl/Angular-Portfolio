@@ -9,6 +9,7 @@ p {
   color: #fff;
   font-size: 14px;
   line-height: 24px;
+  margin: 15px 0;
 }
 .btn { /*should be reviewed for relevance*/
 	/* display: flex; */
