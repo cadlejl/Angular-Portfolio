@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 //import { ModalModule, ButtonsModule/*, BsDropdownModule*/  } from "ngx-bootstrap";
 
-//import { FormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 // import { ReactiveFormsModule } from "@angular/forms";
 
 import { FormModule } from "./form/form.module";
@@ -15,9 +15,10 @@ import { FormModule } from "./form/form.module";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { environment } from '../environments/environment';
-import { AppService } from "./service/app.service";
+// import { AppService } from "./service/app.service";
 
-import { AppDataFetchingService } from "./service/app-data-fetching.service";
+// import { AppDataFetchingService } from "./service/app-data-fetching.service";
+import { AngularFireAuth } from "angularfire2/auth";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,7 +27,7 @@ import { AppDetailsComponent } from './app-details/app-details.component';
 import { AppSectionComponent } from './app-section/app-section.component';
 import { IntroComponent } from './intro/intro.component';
 
-import { ModalModule/*, ButtonsModule*/ } from "ngx-bootstrap";
+import { ModalModule/*, ButtonsModule*/, BsDropdownModule } from "ngx-bootstrap";
 
 
 // import { RFormModalComponent } from "./form/r-form-modal/r-form-modal.component";
@@ -45,13 +46,13 @@ import { ModalModule/*, ButtonsModule*/ } from "ngx-bootstrap";
   ],
   imports: [
     BrowserModule,
-    //FormsModule,
+    FormsModule,
     //ReactiveFormsModule,
     //BrowserAnimationsModule, // This is imported in FormModule and probably doesn't need to be imported here
     // MatRadioModule,
     ModalModule.forRoot(),
     //ButtonsModule.forRoot(),
-    //BsDropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase /*,'my-app-name'*/),
     FormModule
@@ -61,7 +62,7 @@ import { ModalModule/*, ButtonsModule*/ } from "ngx-bootstrap";
     // ButtonsModule,
     //AppShowcaseComponent
   ],
-  providers: [ AppService, AppDataFetchingService ],
+  providers: [ AngularFireAuth ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

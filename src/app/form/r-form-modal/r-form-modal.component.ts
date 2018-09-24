@@ -92,8 +92,6 @@ export class RFormModalComponent implements OnInit, OnChanges {
     }
   }
 
-
-
   ///*** Populating the apps array and setting the positions array ***///
   // getApps() {
   //   this.appDataFetchingService.subject.subscribe({

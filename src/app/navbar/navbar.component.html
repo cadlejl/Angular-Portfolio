@@ -14,8 +14,8 @@
     </button> -->
 
     <div 
-      class="collapse navbar-collapse" 
-      id="navbarSupportedContent">
+      class="collapse navbar-collapse navbarSupportedContent">
+      <!-- id="navbarSupportedContent" -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a 
@@ -33,25 +33,101 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li> -->
+        <li>
+          <!-- <span 
+            dropdown 
+            (onShown)="onShown()" 
+            (onHidden)="onHidden()" 
+            (isOpenChange)="isOpenChange()">
+            <a 
+              href 
+              id="basic-link" 
+              dropdownToggle 
+              (click)="false"
+              aria-controls="basic-link-dropdown">
+              jaime@coficiency.com
+            </a>
+            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="basic-link">
+              <li *ngFor="let choice of items">
+                <a class="dropdown-item" href="#">{{choice}}</a>
+              </li>
+            </ul>
+          </span> -->
+        </li>
       </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
     </div>
+    <ng-template #showLogin>
+      <span class="navbarSupportedContent">
+        <a class="login" 
+          (click)="smModal.show(); formFresh()">
+          Login
+        </a>
+      </span>
+    </ng-template>
+    <span 
+    *ngIf="afAuth.user | async as user; else showLogin"
+    dropdown 
+    container="body">
+    <a 
+      href 
+      id="basic-link" 
+      dropdownToggle 
+      (click)="false"
+      aria-controls="basic-link-dropdown">
+      {{ user.email }}
+    </a>
+    <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
+        role="menu" aria-labelledby="basic-link">
+      <li *ngFor="let choice of items">
+        <a class="dropdown-item" href="#" (click)="logout()">{{choice}}</a>
+      </li>
+    </ul>
+  </span>
   </div>
 </nav>
+ 
+<div 
+  bsModal 
+  #smModal="bs-modal" 
+  class="modal fade" 
+  tabindex="-1" 
+  role="dialog" 
+  aria-labelledby="dialog-sizes-name2">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="text-center">Login</h2>
+
+        <form (submit)="login(); smModal.hide()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              class="form-control"
+              [(ngModel)]="email"
+              name="email"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              class="form-control"
+              [(ngModel)]="password"
+              name="password"
+              required>
+          </div>
+          <input 
+            type="submit" 
+            class="btn btn-primary btn-block" 
+            value="Submit">
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
