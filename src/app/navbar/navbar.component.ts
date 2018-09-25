@@ -22,16 +22,17 @@ export class NavbarComponent {
   constructor(private afAuth: AngularFireAuth) {}
 
   login() {
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+      .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode === 'auth/wrong-password') {
           alert('Wrong password.');
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
     });
   }
 
@@ -43,4 +44,18 @@ export class NavbarComponent {
     this.email = '';
     this.password = '';
   }
+
+
+
+  // canActivate(
+  //   next: ActivatedRouteSnapshot,
+  //   state: RouterStateSnapshot): Observable<boolean>  {
+  //   return this.auth.afAuth.authState.pipe(
+  //     take(1),
+  //     map((authState) => !!authState),
+  //     tap(authenticated => {
+  //       if (!authenticated) this.router.navigate(['/login'])
+  //     })
+  //   )
+  // }
 }

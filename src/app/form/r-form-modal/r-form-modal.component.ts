@@ -16,6 +16,8 @@ import { FormConfigurationService } from "../form-services/services/form-configu
 import { FormSubmissionService } from "../form-services/services/form-submission.service";
 import { PositionShiftingService } from "../form-services/services/position-shifting.service";
 
+import { AuthGuard } from "../../service/auth.guard";
+
 @Component({
   selector: 'r-form-modal',
   templateUrl: /*'radio-button-modal.component.html'*/ './r-form-modal.component.html',
@@ -38,6 +40,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
   private positionChanged = false;
   private noPositionChange = false;
   private editing = false;
+  private auth = false;
+  private noAuth = false;
 
   constructor(
     private formB: FormBuilder, 
@@ -46,7 +50,8 @@ export class RFormModalComponent implements OnInit, OnChanges {
     private sectionChangeService: SectionChangeService,
     private formConfigurationService: FormConfigurationService,
     private formSubmissionService: FormSubmissionService,
-    private positionShiftingService: PositionShiftingService
+    private positionShiftingService: PositionShiftingService,
+    private authGuard: AuthGuard
   ) {  }
 
 
@@ -57,6 +62,7 @@ export class RFormModalComponent implements OnInit, OnChanges {
     //this.positions = this.positionsSettingService.positions(this.apps);
     this.getApps();
     this.configureForm();
+    this.getAuth();
   }
 
   //*** EDIT: This should work for now as long as editing is all OnChanges is used for.
@@ -81,6 +87,22 @@ export class RFormModalComponent implements OnInit, OnChanges {
     }
   }
   ///*** END EDITING ***///
+
+
+  getAuth() {
+    this.authGuard.canActivate().subscribe(auth => {
+        this.auth = auth;
+      })
+  }
+
+  errorMessage() {
+    if (!this.auth) {
+      this.noAuth = true;
+      setTimeout (() => { this.noAuth = false; }, 3000);
+    }
+  }
+
+
 
   /* Called in template: newSection models radio-button values. Then a position is popped if true or pushed if false, on positions. */
   /* If editing an app in a section with no other app in it, positions had the extra popped off onChanges(), noPositionChange = false, and this code will not run, because the last section will be shifted down one place. */

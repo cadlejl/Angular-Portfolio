@@ -196,9 +196,14 @@
                 formControlName="description"-->
             </div>
 
-
+            <!-- <p 
+              *ngIf="noAuth"
+              class="position-absolute mx-auto errorMessage">
+              You must be logged in to save!
+            </p> -->
 
             <div class="buttons">
+              
               <!-- <button 
                 type="button" 
                 class="close pull-right" 
@@ -214,16 +219,18 @@
                 (click)="staticModal.hide(); freshForm()">
                 Cancel
               </button>
-              <button 
-                type="submit" 
-                class="btn btn-primary"
-                (click)="staticModal.hide()"
-                value="Submit"
-                [disabled]="appForm.invalid"><!--(click)="submitForm()"-->
-                Save
-              </button>
+              <span (click)="errorMessage()">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary"
+                  (click)="staticModal.hide()"
+                  value="Submit"
+                  [disabled]="appForm.invalid || !auth"><!--(click)="submitForm()"-->
+                  Save
+                </button>
+              </span>
               <p 
-                *ngIf="canDelete"
+                *ngIf="canDelete && auth"
                 class="delete" 
                 (click)="submitForm(true); staticModal.hide(); modalShow = false"><!--; modalShow = false
                   *ngIf="canDelete"   

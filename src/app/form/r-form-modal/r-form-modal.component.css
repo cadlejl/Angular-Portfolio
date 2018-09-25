@@ -60,7 +60,7 @@ textarea {
   position: relative;
   border: none;
 	/* padding-bottom: 4rem; */
-	/* padding: 2rem 0; */
+  /* padding: 2rem 0; */
 	padding-top: 1.5rem;
   justify-content: center;
 }
@@ -87,9 +87,12 @@ textarea {
 	color: #C62828;
 	font-weight: 600;
 }
-
-
-
 a:focus {
   background-color: #2572C8;
 }
+/* .errorMessage {
+  color: red;
+  width: 90%;
+  text-transform: uppercase;
+  font-weight: 600;
+} */
